@@ -1,0 +1,14 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+/* 小球背景颜色 */
+/* .swiper-pagination-bullet{
+  opacity: 0.2;
+  background: #fff !important;
+} */
+/* 索引小球背景颜色 */
+/* .swiper-pagination-bullet-active{
+  opacity: 1;
+  background: red !important;
+} */

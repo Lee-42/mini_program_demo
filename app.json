@@ -1,0 +1,10 @@
+{
+	"platform": "desktop",
+	"launcher": "nt_launcher",
+  "compiler": "nt_compiler",
+  "devtools": "no_devtools",
+  "vconsole": false,
+  "eventTracking": false,
+  "pages": ["pages/index/index"]
+}
+ 
