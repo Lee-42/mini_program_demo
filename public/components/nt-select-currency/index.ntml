@@ -1,0 +1,11 @@
+<nt-form-item
+  :label="label"
+  :prop="fieldName"
+  :required="required"
+  :ntValidator="currencyValidator"
+
+>
+  <nt-select nt:bind="$attrs"  v-model="currencyValue" :fieldName="fieldName" @change="changeEvent">
+    <nt-option  nt:for="item in currencyList" :label="item.label" :value="item.value"></nt-option>
+  </nt-select>
+</nt-form-item>

@@ -1,0 +1,7 @@
+{
+    "component": true,
+    "usingComponents": {
+        "nt-input-singledate": "public/components/nt-input-singledate/index",
+        "nt-input-voucherno": "public/components/nt-input-voucherno/index"
+    }
+}

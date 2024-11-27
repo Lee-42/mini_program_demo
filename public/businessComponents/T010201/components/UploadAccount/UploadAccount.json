@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "nt-input-account": "public/components/nt-input-account/index",
+    "nt-select-currency": "public/components/nt-select-currency/index",
+    "nt-input-money": "public/components/nt-input-money/index"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "nt-querylist": "public/components/nt-querylist/index",
+    "nt-input-money": "public/components/nt-input-money/index"
+  }
+}

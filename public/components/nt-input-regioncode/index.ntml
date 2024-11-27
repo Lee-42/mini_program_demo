@@ -1,0 +1,10 @@
+<!-- public\components\inputMobile\inputMobile\inputMobile.ntml -->
+<nt-form-item
+  :label="label"
+  :prop="fieldName"
+  :required="required"
+  :ntValidator="codeNumberValidate"
+>
+
+  <nt-input nt:bind="$attrs"  ref="inputRef" type="text" v-model="regioncode" maxlength="4"  :fieldName="fieldName"></nt-input>
+</nt-form-item>

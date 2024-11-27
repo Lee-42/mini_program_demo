@@ -1,0 +1,169 @@
+<!-- components\poc-menu-right\index.ntml -->
+<!-- <nt-view class="poc-menu-right">
+    
+</nt-view> -->
+
+<!-- 叫号 开始-->
+<nt-view class="nt-poc-card">
+    <!-- 标题 -->
+    <!-- <nt-view class="nt-poc-title">
+        <nt-view class="nt-poc-title__decoration"></nt-view>
+        <nt-view class="nt-poc-title__content">叫号</nt-view>
+    </nt-view> -->
+
+    <nt-title title="叫号"></nt-title>
+    <!-- 当前信息 -->
+    <nt-view class="queue-info">
+        <nt-view class="queue-info-item">
+            <span class="queue-info__label">当前：</span>
+            <span class="queue-info__content current">{{currentNumber}}</span>
+        </nt-view>
+        <nt-view class="queue-info-item">
+            <span class="queue-info__label">业务类型：</span>
+            <span class="queue-info__content">{{businessType}}</span>
+        </nt-view>
+    </nt-view>
+    <!-- 叫号菜单 -->
+    <nt-view class="queue-menu">
+        <nt-view class="queue-menu-item" @click="queueHandle(0)">
+            <img class="queue-menu-item__img" src="./icon/callNum.png" />
+            <span class="queue-menu-item__label">叫号</span>
+        </nt-view>
+        <nt-view class="queue-menu-item" @click="queueHandle(1)">
+            <img class="queue-menu-item__img" src="./icon/recall.png"/>
+            <span class="queue-menu-item__label">重叫</span>
+        </nt-view>
+        <nt-view class="queue-menu-item" @click="queueHandle(2)">
+            <img class="queue-menu-item__img" src="./icon/stop.png"/>
+            <span class="queue-menu-item__label">{{isStop ? "暂停":"继续"}}</span>
+        </nt-view>
+        <nt-view class="queue-menu-item" @click="queueHandle(3)">
+            <img class="queue-menu-item__img" src="./icon/cart.png"/>
+            <span class="queue-menu-item__label">预填单</span>
+        </nt-view>
+    </nt-view>
+</nt-view>
+<!-- 叫号 结束-->
+
+<!-- 已登录状态  开始-->
+<!-- 客户信息 开始-->
+<nt-view class="nt-poc-card" nt:if="isLogin">
+    <!-- 标题 -->
+    <!-- <nt-view class="nt-poc-title">
+        <nt-view class="nt-poc-title__decoration"></nt-view>
+        <nt-view class="nt-poc-title__content">客户信息</nt-view>
+    </nt-view> -->
+    <nt-title title="客户信息">
+        <template slot="rightBtn">
+            <nt-button type="text" @click="backQuery">结束服务</nt-button>
+        </template>
+    </nt-title>
+    <!-- 客户身份卡片 -->
+    <nt-view class="customer-infos">
+        <nt-badge :data="custInfos" style="max-width: unset;" @handleClick="custHandle"></nt-badge>
+    </nt-view>
+    <!-- 资产情况 -->
+    <!-- <nt-view class="property-situation">
+        <nt-view class="property-situation-title">资产情况</nt-view>
+        <div>
+            <nt-table :headerCellStyle="{background: '#3b6dd2', color: '#fff'}" :configs="tabConfigs"
+                :tableData="tableData"></nt-table>
+        </div>
+    </nt-view> -->
+</nt-view>
+<!-- 客户信息 结束-->
+
+<!-- 推荐信息 开始-->
+<nt-view nt:if="false" class="nt-poc-card">
+    <!-- 标题 -->
+    <!-- <nt-view class="nt-poc-title">
+        <nt-view class="nt-poc-title__decoration"></nt-view>
+        <nt-view class="nt-poc-title__content">推荐信息</nt-view>
+    </nt-view> -->
+    <nt-title title="推荐信息"></nt-title>
+    <nt-view class="recommend-infos">
+        <table class="recommend-table">
+            <thead class="recommend-table__header-wrapper">
+                <tr class="recommend-table__header">
+                    <th class="recommend-table__cell is-center" width="60">序号</th>
+                    <th class="recommend-table__cell">业务提醒消息</th>
+                    <th class="recommend-table__cell is-center" width="80">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr nt:for="(item,index) in recommendTabs" :key="index" class="recommend-table__body">
+                    <td class="recommend-table__cell is-center">
+                        <span class="serial-number">{{index+1}}</span>
+                    </td>
+                    <td class="recommend-table__cell">{{item.message}}</td>
+                    <td class="recommend-table__cell is-center">
+                        <button nt:if="item.type==1" class="recommend-button is-primary"
+                            @click="toActivate">去开通</button>
+                        <button nt:if="item.type==2" class="recommend-button is-warning"
+                            @click="toUpgradation">去升级</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </nt-view>
+</nt-view>
+<!-- 推荐信息 结束-->
+
+<!-- 已登录状态  结束-->
+
+<!-- 未登录状态  开始-->
+<nt-view class="nt-poc-card no-login" nt:if="!isLogin">
+    <!-- <nt-view class="nt-poc-title">
+        <nt-view class="nt-poc-title__decoration"></nt-view>
+        <nt-view class="nt-poc-title__content">快速查询</nt-view>
+    </nt-view> -->
+    <nt-title title="快速查询"></nt-title>
+    <nt-form 
+        hainan-theme="{{false}}"
+        inline="{{false}}" 
+        ref="idForm" 
+        :model="idModel" 
+        class="search-form"
+        label-width="100px">
+        <nt-form-item label="客户名称" prop="cstNm">
+            <nt-input v-model="idModel.cstNm" fieldName="cstNm"/>
+        </nt-form-item>
+        <nt-form-item label="客户号" prop="cstNo">
+            <nt-input v-model="idModel.cstNo" fieldName="cstNo"/>
+        </nt-form-item>
+        <nt-form-item label="证件类型" prop="identTp">
+            <nt-select v-model="idModel.identTp" fieldName="identTp">
+                <nt-option nt:for="item in idenTypeList" :label="item.label" :value="item.value"></nt-option>
+            </nt-select>
+        </nt-form-item>
+        <nt-form-item label="证件号码" prop="identNo" :ntValidator="identNumValidator">
+            <nt-input v-model="idModel.identNo" clearable fieldName="identNo"/>
+        </nt-form-item>
+    </nt-form>
+    <nt-view class="search-form__footer">
+        <nt-button bindtap="reset_id">重置</nt-button>
+        <nt-submit type="primary" @submit="quickQuery">查询</nt-submit>
+    </nt-view>
+
+    <nt-view class="line"></nt-view>
+
+    <nt-form 
+        inline="{{false}}" 
+        hainan-theme="{{false}}"
+        ref="cardForm" 
+        :model="cardModel" 
+        class="search-form" 
+        :rules="rules" 
+        :configs="cardConfig"
+        label-width="100px">
+        
+        <nt-form-item label="卡号/账号" prop="acctNo" required>
+            <nt-input v-model="cardModel.acctNo" clearable fieldName="acctNo" />
+        </nt-form-item>
+    </nt-form>
+    <nt-view class="search-form__footer">
+        <nt-button @click="reset_card">重置</nt-button>
+        <nt-submit type="primary" @submit="submit_card">查询</nt-submit>
+    </nt-view>
+</nt-view>
+<!-- 未登录状态  结束-->

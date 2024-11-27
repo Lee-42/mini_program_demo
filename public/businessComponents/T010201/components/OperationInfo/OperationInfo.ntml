@@ -1,0 +1,69 @@
+<nt-form class="c-operation-info" model="{{ formModel }}" label-width="130px" inline
+  disabled="{{ expandFormData.operationFlag === 'D' }}">
+  <nt-layout border>
+    <template #header>操作员管理</template>
+    <nt-form-item label="操作员号" prop="operationNo" required>
+      <nt-input v-model="formModel.operationNo" fieldName="operationNo" maxlength="12" disabled></nt-input>
+    </nt-form-item>
+    <nt-form-item class="nt-layout-block" label="操作员姓名" prop="operationName" required>
+      <nt-input v-model="formModel.operationName" fieldName="operationName" myAutoFocus="operation-info"></nt-input>
+    </nt-form-item>
+    <!-- <nt-input-password label="新密码" nt:if="{{ true }}" v-model="formModel.newPassword" fieldName="newPassword" isUseEquip
+      autoCollect @useEquip="onNewPwdInput" />
+    <nt-input-password label="旧密码" nt:if="{{ true }}" v-model="formModel.oldPassword" fieldName="oldPassword" isUseEquip
+      autoCollect @useEquip="onOldPwdInput" /> -->
+    <nt-select-idtype label="证件类型" v-model="formModel.identTp" fieldName="identTp" />
+    <nt-input-personidnum label="证件号码" v-model="formModel.identNo" fieldName="identNo"
+      cardType="{{ formModel.identTp }}" isToUpperCase isShowTextLength required ntValidator="{{ onIdNoValidate }}" />
+    <nt-form-item label="性别" prop="gender">
+      <nt-select v-model="formModel.gender" fieldName="gender">
+        <nt-option nt:for="opt in genderList" :key="opt.value" value="{{opt.value}}" label="{{opt.label}}"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <nt-input-telphone label="联系电话" v-model="formModel.telphone" fieldName="telphone" />
+    <nt-input-mobile label="手机号码" v-model="formModel.mobile" fieldName="mobile" required />
+    <nt-form-item label="Email地址" prop="email" ntValidator="{{ onEmailValidate }}">
+      <nt-input v-model="formModel.email" fieldName="email" maxlength="128"></nt-input>
+    </nt-form-item>
+    <nt-form-item label="是否管理员" prop="isAdmin" ntValidator="{{ onIsAdminValidate }}" required>
+      <nt-select v-model="formModel.isAdmin" fieldName="isAdmin" disabled="{{ isAdminFlag }}">
+        <nt-option value="Y" label="是"></nt-option>
+        <nt-option value="N" label="否"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <template nt:if="{{ isOneStop }}">
+      <nt-form-item label="证书申请日期" prop="ctfAplyDt">
+        <nt-input v-model="formModel.ctfAplyDt" fieldName="ctfAplyDt" disabled></nt-input>
+      </nt-form-item>
+      <nt-input-usbKey label="椰盾编号" fieldName="usbKeyNo" v-model="formModel.usbKeyNo" mainTranCd="{{ mainCd }}"
+        disabled="{{ expandFormData.operationFlag !== 'C' }}" noCheck isUseEquip autoCollect manualCollect required />
+      <nt-form-item label="是否重置登录密码" prop="rsetPswdFlg">
+        <nt-select v-model="formModel.rsetPswdFlg" fieldName="rsetPswdFlg">
+          <nt-option value="Y" label="是"></nt-option>
+          <nt-option value="N" label="否"></nt-option>
+        </nt-select>
+      </nt-form-item>
+      <nt-form-item class="nt-layout-block" label="备注" prop="remarkRmk">
+        <nt-input v-model="formModel.remarkRmk" fieldName="remarkRmk"></nt-input>
+      </nt-form-item>
+    </template>
+    <nt-form-item class="nt-layout-block" label="所属角色">
+      <nt-querylist style="width: 100%;" filterConfigs="{{ roleListFilterConfig }}"
+        tableConfigs="{{ roleListTableConfigs }}" tableData="{{ roleListTableData }}" isPrint="{{ false }}"
+        isSelect="{{ formModel.isAdmin === 'N' }}" isMultiple @handleSelectionChange="onRoleListSelected" />
+    </nt-form-item>
+  </nt-layout>
+  <nt-layout border>
+    <template #header>可操作账户列表</template>
+    <nt-querylist style="width: 100%;" filterConfigs="{{ accountFilterConfig }}"
+      tableConfigs="{{ accountTableConfigs }}" tableData="{{ accountTableData }}" isPrint="{{ false }}" isMultiple
+      @handleSelectionChange="onAccountSelected">
+    </nt-querylist>
+  </nt-layout>
+  <nt-view style="margin-top: 16px; text-align:right;">
+    <nt-submit type="primary" v-debounce="submit">提交</nt-submit>
+  </nt-view>
+</nt-form>
+
+<nt-onlinecheck v-model="onlinecheckData.visible" mainCd="{{ mainCd }}" checkIDNo="{{ onlinecheckData.checkNo }}"
+  checkName="{{ onlinecheckData.checkName }}" @check="onOnlinecheck" />

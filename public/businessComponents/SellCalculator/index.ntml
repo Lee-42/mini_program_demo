@@ -1,0 +1,16 @@
+<nt-view style="display: flex;flex-wrap: wrap;">
+    <nt-form-item label="收费方式" prop="cashTfrAcctFlg" ntValidator="{{ validate }}">
+        <nt-select v-model="formModel.cashTfrAcctFlg" fieldName="cashTfrAcctFlg">
+            <nt-option value="0" label="不收"></nt-option>
+            <nt-option value="1" label="现金"></nt-option>
+            <nt-option value="2" label="转账"></nt-option>
+        </nt-select>
+    </nt-form-item>
+    <nt-form-item label="凭证数量" prop="count" ntValidator="{{ onCountValidate }}">
+        <nt-input v-model="formModel.count" fieldName="count" disabled="{{ disabled }}" type="number"></nt-input>
+    </nt-form-item>
+    <nt-input-money label="工本费" v-model="formModel.costOfPdnAmt" fieldName="costOfPdnAmt" disabled />
+    <nt-input-money label="手续费" v-model="formModel.pcdFeeAmt" fieldName="pcdFeeAmt" disabled />
+    <nt-input-money label="总工本费" v-model="formModel.allCostOfPdnAmt" fieldName="allCostOfPdnAmt" disabled />
+    <nt-input-money label="总手续费" v-model="formModel.allPcdFeeAmt" fieldName="allPcdFeeAmt" disabled />
+</nt-view>

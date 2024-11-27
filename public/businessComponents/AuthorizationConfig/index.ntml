@@ -1,0 +1,82 @@
+<nt-layout border>
+  <template #header>{{ type === 'A' ? '账户相关业务授权模式' : '非账户相关业务授权模式' }}</template>
+  <nt-form-item nt:if="{{  type === 'A' }}" label="账号" prop="acctSrlNo" required ntValidator="{{ onAccountValidate }}">
+    <nt-select v-model="formModel.acctSrlNo" fieldName="acctSrlNo" disabled="{{ idEdit }}">
+      <nt-option nt:for="opt in accountOptions" key="{{ opt.value }}" value="{{ opt.value }}"
+        label="{{ opt.label }}"></nt-option>
+    </nt-select>
+  </nt-form-item>
+  <nt-form-item nt:elif="{{  type === 'P' }}" label="产品" prop="pdNo" required ntValidator="{{ onProductValidate }}">
+    <nt-select v-model="formModel.pdNo" fieldName="pdNo" disabled="{{ idEdit }}">
+      <nt-option nt:for="opt in productOptions" key="{{ opt.value }}" value="{{ opt.value }}"
+        label="{{ opt.label }}"></nt-option>
+    </nt-select>
+  </nt-form-item>
+  <nt-form-item label="1级复核次数" prop="lvl1ChkTms" required ntValidator="{{ onReCheckValidate }}">
+    <nt-input v-model="formModel.lvl1ChkTms" fieldName="lvl1ChkTms" type="number" min="0" maxlength="2"></nt-input>
+  </nt-form-item>
+  <nt-form-item label="2级复核次数" prop="lvl2ChkTms" required ntValidator="{{ onReCheckValidate }}">
+    <nt-input v-model="formModel.lvl2ChkTms" fieldName="lvl2ChkTms" type="number" min="0" maxlength="2"></nt-input>
+  </nt-form-item>
+  <nt-form-item label="3级复核次数" prop="lvl3ChkTms" required ntValidator="{{ onReCheckValidate }}">
+    <nt-input v-model="formModel.lvl3ChkTms" fieldName="lvl3ChkTms" type="number" min="0" maxlength="2"></nt-input>
+  </nt-form-item>
+  <nt-form-item label="4级复核次数" prop="lvl4ChkTms" required ntValidator="{{ onReCheckValidate }}">
+    <nt-input v-model="formModel.lvl4ChkTms" fieldName="lvl4ChkTms" type="number" min="0" maxlength="2"></nt-input>
+  </nt-form-item>
+  <nt-form-item label="5级复核次数" prop="lvl5ChkTms" required ntValidator="{{ onReCheckValidate }}">
+    <nt-input v-model="formModel.lvl5ChkTms" fieldName="lvl5ChkTms" type="number" min="0" maxlength="2"></nt-input>
+  </nt-form-item>
+  <nt-form-item label="6级复核次数" prop="lvl6ChkTms" required ntValidator="{{ onReCheckValidate }}">
+    <nt-input v-model="formModel.lvl6ChkTms" fieldName="lvl6ChkTms" type="number" min="0" maxlength="2"></nt-input>
+  </nt-form-item>
+  <!-- table -->
+  <nt-querylist nt:if="{{  type === 'A' }}" style="width: 100%;" tableConfigs="{{ accountConfigs }}"
+    tableData="{{ roleList }}" isPrint="{{ false }}" isSelect="{{ false }}">
+    <template #actions="props">
+      <nt-button link type="default" size="small" @click="onAccountUpdate(props.row)">修改</nt-button>
+      <nt-button link type="danger" size="small" @click="onAccountRemove(props.row)">删除</nt-button>
+    </template>
+  </nt-querylist>
+  <nt-querylist nt:else style="width: 100%;" tableConfigs="{{ productConfigs }}" tableData="{{ roleList }}"
+    isPrint="{{ false }}" isSelect="{{ false }}">
+    <template #actions="props">
+      <nt-button link type="default" size="small" @click="onProductUpdate(props.row)">修改</nt-button>
+      <nt-button link type="danger" size="small" @click="onProductRemove(props.row)">删除</nt-button>
+    </template>
+  </nt-querylist>
+  <!-- 修改区域 -->
+  <nt-layout border nt:if="{{ formModel.oprNo }}">
+    <template #header>修改区域</template>
+    <nt-form-item class="nt-layout-block" label="操作员姓名" prop="oprNm">
+      <nt-input v-model="formModel.oprNm" fieldName="oprNm" disabled></nt-input>
+    </nt-form-item>
+    <nt-form-item label="用户号" prop="usrNo">
+      <nt-input v-model="formModel.usrNo" fieldName="usrNo" disabled></nt-input>
+    </nt-form-item>
+    <nt-form-item label="操作员号" prop="oprNo">
+      <nt-input v-model="formModel.oprNo" fieldName="oprNo" disabled></nt-input>
+    </nt-form-item>
+    <nt-form-item label="复核级别" prop="chkLvl">
+      <nt-select v-model="formModel.chkLvl" fieldName="chkLvl" myAutoFocus="authorization-lv">
+        <nt-option nt:for="num in 6" key="{{ num }}" value="{{ num + '' }}" label="{{ num + '' }}"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <template nt:if="{{  type === 'A' }}">
+      <nt-form-item label="账号序号" prop="acctNoSrlNo">
+        <nt-input v-model="formModel.acctNoSrlNo" fieldName="acctNoSrlNo" disabled></nt-input>
+      </nt-form-item>
+      <nt-form-item class="nt-layout-block" label="角色名称" prop="oprRl">
+        <nt-input v-model="formModel.oprRl" fieldName="oprRl" disabled></nt-input>
+      </nt-form-item>
+      <nt-input-money label="最少可复核金额(含)" v-model="formModel.minCnChkAMt" fieldName="minCnChkAMt" required />
+      <nt-input-money label="最大可复核金额(含)" v-model="formModel.maxCnChkAMt" fieldName="maxCnChkAMt" required
+        ntValidator="{{ onMaxAmtValidate }}" />
+      <nt-input-money label="对外支付金额(含)" v-model="formModel.drctExtrnlDsbrAmt" fieldName="drctExtrnlDsbrAmt" required
+        ntValidator="{{ onPayAmtValidate }}" />
+      <nt-view class="nt-layout-default" style="text-align: right;margin-right: 10px;">
+        <nt-button fieldName="authorBtn" bindtap="onConfirm">确定</nt-button>
+      </nt-view>
+    </template>
+  </nt-layout>
+</nt-layout>

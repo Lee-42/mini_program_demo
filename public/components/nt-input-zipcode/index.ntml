@@ -1,0 +1,5 @@
+
+    <nt-form-item :prop="fieldName" :ntValidator="zipcodeRule" :label="label" :required="required">
+        <nt-input  nt:bind="$attrs"  v-model="zipcode" ref="inputZ" :fieldName="fieldName"
+            @input="handleInput"></nt-input>
+    </nt-form-item>

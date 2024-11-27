@@ -1,0 +1,12 @@
+/* public\components\table\table\table.ntss */
+/deep/ .single-choose .nt-checkbox {
+  display: none;
+  background-color: aqua;
+  width: 1000px;
+}
+.filter-form {
+  :deep(.nt-form-item) {
+    margin-bottom: 5px;
+    margin-right: unset;
+  }
+}

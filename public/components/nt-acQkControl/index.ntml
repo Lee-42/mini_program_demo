@@ -1,0 +1,30 @@
+<nt-layout border :header="header">
+    <nt-form-item prop="cmb_CashFlag" label="现转标志" :ntValidator="cmb_CashFlag_LostFocus">
+        <nt-select fieldName="cmb_CashFlag" v-model="formModel.cmb_CashFlag">
+            <nt-option label="现金" value="1"></nt-option>
+            <nt-option label="转账" value="2"></nt-option>
+        </nt-select>
+    </nt-form-item>
+    <nt-form-item prop="cb_TranType" nt:if="showTranTp" label="转账方式">
+        <nt-select fieldName="cb_TranType" v-model="formModel.cb_TranType"></nt-select>
+    </nt-form-item>
+    <!-- <nt-form-item prop="tb_Amt" label="交易金额" :ntValidator="tb_Amt_LostFocus">
+        <nt-input></nt-input>
+    </nt-form-item> -->
+    <nt-input-money fieldName="tb_Amt" v-model="formModel.tb_Amt" label="交易金额" :ntValidator="tb_Amt_LostFocus" />
+    <nt-form-item prop="cmb_Pwdflag" label="支取标志" :ntValidator="cmb_Pwdflag_LostFocus">
+        <nt-select fieldName="cmb_Pwdflag" v-model="formModel.cmb_Pwdflag">
+            <nt-option nt:for="item in pwdflagLt" :label="item.label" :value="item.value"></nt-option>
+        </nt-select>
+    </nt-form-item>
+    <nt-input-password fieldName="pb_Password" :disabled="pwdDisabled" @getPwdInfo="getPwdInfo" @focus="pb_Password_GotFocus" label="密码"
+        v-model="formModel.pb_Password" :ntValidator="pb_Password_LostFocus" />
+    <nt-select-idtype v-model="formModel.cmb_Idtype" :disabled="idTpDisabled" fieldName="cmb_Idtype" label="证件类型"
+        :ntValidator="cmb_Idtype_LostFocus" />
+
+    <nt-input-personidnum label="证件号码" :disabled="idDisabled" v-model="formModel.tb_Idno" fieldName="tb_Idno"
+        :ntValidator="tb_Idno_LostFocus" />
+    <!-- <nt-form-item prop="tb_Idno" label="证件号码">
+        <nt-input fieldName="tb_Idno" disabled v-model="formModel.tb_Idno"></nt-input>
+    </nt-form-item> -->
+</nt-layout>

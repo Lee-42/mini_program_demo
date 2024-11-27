@@ -1,0 +1,9 @@
+<nt-form-item :prop="fieldName" :label="label" :required="required" 
+:ntValidator="dateValidator">
+
+  <nt-input nt:bind="$attrs" :isFuc="true" v-model="date" :fieldName="fieldName" @input="handleInput">
+    <template #suffix>
+      <img style="width: 14px;" src="../assets/calendar.png"><img>
+    </template>
+  </nt-input>
+</nt-form-item>

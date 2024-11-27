@@ -1,0 +1,27 @@
+<view>
+  <view class="pdf" id="deposit-slip">
+    <view :style="{background:`url(${base})no-repeat`}"
+      style="position: relative; height: 800px;background-size: 100% 100%;font-size:18px;text-align: center;">
+      <view style="position: absolute;left: 7%;top:260px;width:11.5%;">{{datas.dateStart}}</view>
+      <view style="position: absolute;left: 18.5%;top:260px;width:12%;">{{datas.dateInterest}}</view>
+      <view style="position: absolute;left: 30.5%;top:260px;width:8%;">{{datas.type}}</view>
+      <view style="position: absolute;left:38.5%;top:260px;width:6.5%;">{{datas.accessType}} </view>
+      <view style="position: absolute;left:45%;top:260px;width:9%;">{{datas.depositTerm}}</view>
+      <view style="position: absolute;left:54%;top:260px;width:9.5%;">{{datas.rate}}</view>
+      <view style="position: absolute;left: 63.5%;top:260px;width:11.5%;">{{datas.dateEnd}} </view>
+      <view style="position: absolute;left: 75%;top:260px;width:10.5%;">{{datas.autoZC}}</view>
+      <view style="position: absolute;left: 85.5%;top:260px;width:9%;">{{datas.operation}}</view>
+      <view style="position: absolute;left: 19%;top:350px;width:33%;text-align: start;">{{datas.acctNo}}</view>
+      <view style="position: absolute;left: 60%;top:350px;width:18%;text-align: start;"> {{datas.acctNm}}</view>
+      <view style="position: absolute;left: 19%;top:460px;width:40%;text-align: start;">{{datas.amtMax}}</view>
+      <view style="position: absolute;left: 72%;top:460px;width:16%;text-align: start;">{{datas.amtMin}}</view>
+      <view style="position: absolute;left: 8%;top:550px;width:10%;text-align: end;">开户行 :</view>
+      <view style="position: absolute;left: 19%;top:550px;width:10%;text-align: start;">{{datas.opnBrname}}</view>
+      <view style="position: absolute;left: 14%;top:725px;width:10%;">{{datas.super}}</view>
+      <view style="position: absolute;left: 44%;top:725px;width:10%;">{{datas.recheck}}</view>
+      <view style="position: absolute;left: 70%;top:725px;width:10%;">{{datas.handling}}
+      </view>
+    </view>
+
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "nt-onlinecheck": "public/components/nt-onlinecheck/index"
+  }
+}

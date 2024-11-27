@@ -1,0 +1,26 @@
+<nt-layout border :header="header">
+    <nt-form-item prop="tb_Acname" class="nt-layout-block" label="户名">
+        <nt-input fieldName="tb_Acname" disabled v-model="acctInfo.acctNm"></nt-input>
+    </nt-form-item>
+    <nt-form-item prop="tb_Prdtname" label="产品名称">
+        <nt-input fieldName="tb_Prdtname" disabled v-model="acctInfo.pdNm"></nt-input>
+    </nt-form-item>
+    <nt-form-item prop="cashDrftFlg" label="钞汇标志">
+        <nt-select fieldName="cashDrftFlg" disabled v-model="acctInfo.cashDrftFlg">
+            <nt-option label="钞户" value="0"></nt-option>
+            <nt-option label="汇户" value="1"></nt-option>
+        </nt-select>
+    </nt-form-item>
+    <nt-form-item prop="medmTp" label="凭证种类">
+        <nt-input fieldName="medmTp" disabled v-model="acctInfo.medmTp"></nt-input>
+    </nt-form-item>
+    <nt-form-item prop="vchrNo2" label="凭证号码">
+        <nt-input fieldName="vchrNo2" disabled v-model="acctInfo.vchrNo2"></nt-input>
+    </nt-form-item>
+    <nt-select-currency label="币种" fieldName="currencyCcy" disabled v-model="acctInfo.currencyCcy" />
+    <!-- <nt-form-item prop="currencyCcy" label="币种">
+        <nt-select fieldName="currencyCcy" disabled v-model="acctInfo.currencyCcy"></nt-select>
+    </nt-form-item> -->
+    <nt-input-money label="余额" nt:if="acctInfo.pswdDrwFlg =='N'" fieldName="balanceBal" disabled
+        v-model="acctInfo.balanceBal" />
+</nt-layout>

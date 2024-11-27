@@ -1,0 +1,233 @@
+<nt-form model="{{formModel}}" label-width="130px">
+  <nt-agent formModel="{{formModel}}" mainCd="{{ mainCd }}" />
+
+  <nt-layout border>
+    <template #header>网上预约信息</template>
+    <nt-form-item label="网上预约" prop="isOnline" required>
+      <nt-select v-model="formModel.isOnline" fieldName="isOnline">
+        <nt-option value="1" label="是"></nt-option>
+        <nt-option value="0" label="否"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <template nt:if="{{ formModel.isOnline === '1' }}">
+      <nt-form-item label="预约受理编号" prop="bkgLsEfcyAcptNo" ntValidator="{{ onBookIdValidate }}" required>
+        <nt-input v-model="formModel.bkgLsEfcyAcptNo" fieldName="bkgLsEfcyAcptNo"></nt-input>
+      </nt-form-item>
+      <nt-form-item label="开户意愿核实" prop="checkAgree">
+        <nt-select v-model="formModel.checkAgree" fieldName="checkAgree">
+          <nt-option value="Y" label="已核实"></nt-option>
+          <nt-option value="N" label="未核实"></nt-option>
+        </nt-select>
+      </nt-form-item>
+      <nt-form-item label="电子营业执照开户" prop="eleBusinessLicense" nt:if="{{ !isOneStop }}">
+        <nt-select v-model="formModel.eleBusinessLicense" fieldName="eleBusinessLicense">
+          <nt-option value="Y" label="是"></nt-option>
+          <nt-option value="N" label="否"></nt-option>
+        </nt-select>
+      </nt-form-item>
+    </template>
+  </nt-layout>
+
+  <nt-layout border>
+    <template #header>证件信息</template>
+    <nt-form-item label="企业类型" prop="entpTp" required>
+      <nt-select v-model="formModel.entpTp" fieldName="entpTp" @change="clearAcct">
+        <nt-option nt:for="opt in entpTpList" :key="opt.value" value="{{opt.value}}" label="{{opt.label}}"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <nt-form-item label="账户类别" prop="acctCtgryTp" ntValidator="{{ onAccountTypeValidate }}" required>
+      <nt-select v-model="formModel.acctCtgryTp" fieldName="acctCtgryTp">
+        <nt-option value="1" label="普通户"></nt-option>
+        <!-- 一键开户交易不允许验资户操作 -->
+        <nt-option value="2" label="验资户" nt:if="{{ !isOneStop }}"></nt-option>
+        <nt-option value="3" label="增资户"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <!-- 2 - 验资户 -->
+    <template nt:if="{{ formModel.acctCtgryTp === '2' }}">
+      <nt-form-item label="证件类型" prop="cptlIdentTp" required>
+        <nt-select v-model="formModel.cptlIdentTp" fieldName="cptlIdentTp">
+          <nt-option nt:for="opt in idType" :key="opt.value" value="{{opt.value}}" label="{{opt.label}}"></nt-option>
+        </nt-select>
+      </nt-form-item>
+      <nt-input-repeat label="证件号码" v-model="formModel.cptlIdentNo" fieldName="cptlIdentNo" required
+        preValidator="{{ onIdentNoValidate }}" ntValidator="{{ checkId1 }}" />
+      <nt-form-item class="nt-layout-block" label="账户名称" prop="cptlAcctNm" required>
+        <nt-input v-model="formModel.cptlAcctNm" fieldName="cptlAcctNm"></nt-input>
+      </nt-form-item>
+    </template>
+    <!-- 其他 -->
+    <template nt:else>
+      <nt-form-item label="证件类型" prop="identTp" required>
+        <nt-select v-model="formModel.identTp" fieldName="identTp">
+          <nt-option nt:for="opt in idType" :key="opt.value" value="{{opt.value}}" label="{{opt.label}}"></nt-option>
+        </nt-select>
+      </nt-form-item>
+      <nt-input-repeat label="证件号码" v-model="formModel.identNo" fieldName="identNo" required
+        preValidator="{{ onIdentNoValidate }}" ntValidator="{{ checkId }}" />
+      <nt-form-item class="nt-layout-block" label="客户名称">
+        <nt-input v-model="cstInfo.cstNm" disabled></nt-input>
+      </nt-form-item>
+      <nt-form-item class="nt-layout-block" label="账户名称" prop="acctNm" required="{{ canCustomizeCompanyName }}">
+        <nt-input v-model="formModel.acctNm" fieldName="acctNm">
+          <template nt:if="{{ !canCustomizeCompanyName }}" #prefix>{{ cstInfo.cstNm }}</template>
+        </nt-input>
+      </nt-form-item>
+    </template>
+  </nt-layout>
+
+  <nt-layout border>
+    <template #header>账户信息</template>
+    <nt-select-currency label="币种" v-model="formModel.currencyCcy" fieldName="currencyCcy"
+      ntValidator="{{ onCurrencyChange }}" required />
+    <nt-form-item label="做外汇用途" prop="frgnExgPpsFlg" ntValidator="{{onForeginExchangeValidate}}" required>
+      <!-- 外币 或者 非普通户 不可选择外汇用途 -->
+      <nt-select v-model="formModel.frgnExgPpsFlg" fieldName="frgnExgPpsFlg"
+        disabled="{{ !isRMB || formModel.acctCtgryTp !== '1' }}">
+        <nt-option nt:for="opt in baseTrueOrFalseList" :key="opt.value" value="{{opt.value}}"
+          label="{{opt.label}}"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <nt-form-item label="业务种类" prop="bsnTp" required>
+      <nt-select v-model="formModel.bsnTp" fieldName="bsnTp" @change="getPdCdList"
+        disabled="{{ formModel.acctCtgryTp !== '1' }}">
+        <nt-option nt:for="opt in bsnTpList" :key="opt.value" value="{{opt.value}}" label="{{opt.label}}"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <nt-form-item label="产品代码" prop="pdCd" ntValidator="{{ getPdInfo }}" required>
+      <nt-select v-model="formModel.pdCd" fieldName="pdCd">
+        <nt-option nt:for="opt in pdCdList" :key="opt.value" value="{{opt.value}}" label="{{opt.label}}"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <nt-form-item label="账户类型" prop="acctTp" ntValidator="{{ checkAcctTp }}" required>
+      <nt-select v-model="formModel.acctTp" fieldName="acctTp">
+        <nt-option nt:for="opt in acctTpList" :key="opt.value" value="{{opt.value}}" label="{{opt.label}}"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <nt-form-item label="介质种类" prop="medmTp" required>
+      <nt-select v-model="formModel.medmTp" fieldName="medmTp">
+        <nt-option value="0000" label="无单折"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <nt-form-item label="计息类型" prop="clcIntTp">
+      <nt-select v-model="formModel.clcIntTp" fieldName="clcIntTp" disabled>
+        <nt-option nt:for="opt in clcIntTpList" :key="opt.value" value="{{opt.value}}"
+          label="{{opt.label}}"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <template nt:if="{{ formModel.clcIntTp && formModel.clcIntTp !== '0' }}">
+      <nt-form-item label="利率类型" prop="intRateTp">
+        <nt-select v-model="formModel.intRateTp" fieldName="intRateTp" disabled>
+          <nt-option nt:for="opt in intRateTpList" :key="opt.value" value="{{opt.value}}"
+            label="{{opt.label}}"></nt-option>
+        </nt-select>
+      </nt-form-item>
+      <nt-input-rate label="基准利率" v-model="formModel.baseRate" fieldName="baseRate" disabled />
+      <nt-input-proportion label="浮动比例" v-model="formModel.fltRto" fieldName="fltRto" disabled />
+      <nt-input-rate label="执行利率" v-model="formModel.execRate" fieldName="execRate"
+        disabled="{{ formModel.intRateTp !== '1' }}" ntValidator="{{ onExecRateValidate }}" />
+    </template>
+    <nt-form-item label="通存通兑标志" prop="uduwFlg" required>
+      <nt-select v-model="formModel.uduwFlg" fieldName="uduwFlg">
+        <nt-option nt:for="opt in uduwFlgList" :key="opt.value" value="{{opt.value}}" label="{{opt.label}}"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <nt-form-item label="收费方式" prop="chrgMd" required>
+      <nt-select v-model="formModel.chrgMd" fieldName="chrgMd">
+        <nt-option nt:for="opt in chrgMdList" :key="opt.value" value="{{opt.value}}" label="{{opt.label}}"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <nt-form-item label="钞汇标志" prop="cashDrftFlg">
+      <nt-select v-model="formModel.cashDrftFlg" fieldName="cashDrftFlg" disabled>
+        <nt-option nt:for="opt in cashDrftFlgList" :key="opt.value" value="{{opt.value}}"
+          label="{{opt.label}}"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <!-- 业务种类 为 保证金 才需要输入 入息账号 -->
+    <template nt:if="{{ formModel.bsnTp === '2002' }}">
+      <!-- 增加保证金收息户的处理，产品代码为 其他保证金 可不输入 -->
+      <nt-form-item label="入息账号" prop="inIntAcctNo" required="{{ formModel.pdCd !== '144' }}"
+        ntValidator="{{ getAcctInfo }}">
+        <nt-input v-model="formModel.inIntAcctNo" fieldName="inIntAcctNo"></nt-input>
+      </nt-form-item>
+      <nt-form-item label="账户序号" prop="inIntAcctSrlNo" nt:if="{{ formModel.inIntAcctSrlNo }}">
+        <nt-input v-model="formModel.inIntAcctSrlNo" fieldName="inIntAcctSrlNo" disabled></nt-input>
+      </nt-form-item>
+    </template>
+    <nt-form-item label="管控账户标志" prop="mutlMgtFlg" required>
+      <nt-select v-model="formModel.mutlMgtFlg" fieldName="mutlMgtFlg"
+        disabled="{{ ['1JY', '1JX'].includes(formModel.pdCd) }}">
+        <nt-option nt:for="opt in mutlMgtFlgList" :key="opt.value" value="{{opt.value}}"
+          label="{{opt.label}}"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <nt-form-item label="核准号" prop="aprvNo">
+      <nt-input v-model="formModel.aprvNo" fieldName="aprvNo"></nt-input>
+    </nt-form-item>
+    <!-- 做外汇用途 - 是 显示 -->
+    <template nt:if="{{ formModel.frgnExgPpsFlg === '1' }}">
+      <nt-form-item label="账户性质" prop="acctChrctrstcAttr">
+        <nt-select v-model="formModel.acctChrctrstcAttr" fieldName="acctChrctrstcAttr">
+          <nt-option nt:for="opt in acctChrctrstcAttrList" :key="opt.value" value="{{opt.value}}"
+            label="{{opt.label}}"></nt-option>
+        </nt-select>
+      </nt-form-item>
+      <nt-form-item label="外汇局审批号" prop="frgnExgMgtAprvlPORcrdsBsnNo">
+        <nt-input v-model="formModel.frgnExgMgtAprvlPORcrdsBsnNo" fieldName="frgnExgMgtAprvlPORcrdsBsnNo"></nt-input>
+      </nt-form-item>
+      <nt-form-item label="限额类型" prop="lmtTp">
+        <nt-select v-model="formModel.lmtTp" fieldName="lmtTp">
+          <nt-option nt:for="opt in lmtTpList" :key="opt.value" value="{{opt.value}}" label="{{opt.label}}"></nt-option>
+        </nt-select>
+      </nt-form-item>
+      <nt-input-money label="限额金额" v-model="formModel.lmtAmt" fieldName="lmtAmt"
+        disabled="{{ formModel.lmtTp === '0' }}" />
+    </template>
+  </nt-layout>
+
+  <nt-layout border>
+    <template #header>联系人信息</template>
+    <nt-select-idtype label="1.证件类型" v-model="formModel.identTp1" fieldName="identTp1" />
+    <nt-input-personidnum label="证件号码" v-model="formModel.identNo1" fieldName="identNo1"
+      cardType="{{ formModel.identTp1 }}" isToUpperCase isShowTextLength operType="2"
+      ntValidator="{{ onValidatePersonIdCardNo }}" />
+    <nt-form-item label="联系人姓名" prop="name1" required="{{ !!formModel.identNo1 }}">
+      <nt-input v-model="formModel.name1" fieldName="name1" disabled="{{ !formModel.identNo1 }}"></nt-input>
+    </nt-form-item>
+    <nt-input-mobile label="联系人电话1" v-model="formModel.phone11" fieldName="phone11"
+      required="{{ !!formModel.identNo1 }}" disabled="{{ !formModel.identNo1 }}" ntValidator="{{ noRepeatMobile }}" />
+    <nt-input-mobile label="联系人电话2" v-model="formModel.phone12" fieldName="phone12" disabled="{{ !formModel.identNo1 }}"
+      ntValidator="{{ noRepeatMobile }}" />
+  </nt-layout>
+  <!-- 非 增资户 可以输入第二联系人 -->
+  <nt-layout border nt:if="{{ formModel.acctCtgryTp && formModel.acctCtgryTp !== '3' }}">
+    <template #header>联系人信息</template>
+    <nt-select-idtype label="2.证件类型" v-model="formModel.identTp2" fieldName="identTp2" />
+    <nt-input-personidnum label="证件号码" v-model="formModel.identNo2" fieldName="identNo2"
+      cardType="{{ formModel.identTp2 }}" isToUpperCase isShowTextLength operType="2"
+      ntValidator="{{ onValidatePersonIdCardNo2 }}" />
+    <nt-form-item label="联系人姓名" prop="name2" required="{{ !!formModel.identNo2 }}">
+      <nt-input v-model="formModel.name2" fieldName="name2" disabled="{{ !formModel.identNo2 }}"></nt-input>
+    </nt-form-item>
+    <nt-input-mobile label="联系人电话1" v-model="formModel.phone21" fieldName="phone21"
+      required="{{ !!formModel.identNo2 }}" disabled="{{ !formModel.identNo2 }}" ntValidator="{{ noRepeatMobile }}" />
+    <nt-input-mobile label="联系人电话2" v-model="formModel.phone22" fieldName="phone22" disabled="{{ !formModel.identNo2 }}"
+      ntValidator="{{ noRepeatMobile }}" />
+  </nt-layout>
+  <!-- 扩展表单插槽 -->
+  <slot name="expand"></slot>
+  <nt-view style="text-align: right;margin:20px">
+    <nt-submit-business nt:if="{{ !isOneStop }}" reqCode="{{ mainCd }}" paymentParams="{{ paymentParams }}"
+      reqParams="{{ reqParams }}" beforeSubmit="{{ beforeSubmit }}" afterSubmit="{{ afterSubmit }}">
+      <template #default>提交</template>
+      <template #print="props">
+        <my-print data="{{ props.printData }}" hidden />
+      </template>
+    </nt-submit-business>
+    <slot name="submitBtn" nt:else></slot>
+  </nt-view>
+</nt-form>
+
+<!-- 联网核查 -->
+<nt-onlinecheck v-model="onlinecheckData.visible" mainCd="{{ mainCd }}" checkIDNo="{{ onlinecheckData.checkNo }}"
+  @check="onOnlinecheck" />

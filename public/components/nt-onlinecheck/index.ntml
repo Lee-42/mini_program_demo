@@ -1,0 +1,99 @@
+<!-- public\components\onlinecheck\onlinecheck.ntml -->
+<nt-dialog :modelValue="modelValue" title="联网核查" width="85%" append-to-body destroy-on-close @close="onDialogClose"
+  @update:modelValue="updateModelValue">
+  <nt-view class="c-onlinecheck">
+    <nt-view class="c-onlinecheck-main">
+      <nt-view class="c-onlinecheck__form">
+        <nt-form model="{{ formModel }}" nt:bind="{{ formAttr }}" label-width="100px">
+          <nt-layout header="身份核查信息">
+            <nt-view style="display: flex;justify-content: space-between;flex:1;">
+              <nt-view>
+                <nt-form-item label="证件号码" prop="checkNo" required ntValidator="{{ onAccountChange }}">
+                  <nt-input v-model="formModel.checkNo" fieldName="checkNo" maxlength="18" show-word-limit
+                    myAutoFocus="online-check"></nt-input>
+                </nt-form-item>
+                <nt-form-item label="姓名" prop="checkName" required>
+                  <nt-input v-model="formModel.checkName" fieldName="checkName"></nt-input>
+                </nt-form-item>
+                <nt-form-item label="业务种类">
+                  <nt-select v-model="formModel.checkType" fieldName="checkType">
+                    <nt-option nt:for="opt in checkReasonType" key="{{ opt.value }}" label="{{ opt.label }}"
+                      value="{{ opt.value }}"></nt-option>
+                  </nt-select>
+                </nt-form-item>
+                <nt-form-item class="nt-layout-block" label="核查原因" nt:if="{{ showReasonField }}">
+                  <!-- 需要替换为 textarea -->
+                  <nt-input type="text" v-model="formModel.checkReason" fieldName="checkReason"></nt-input>
+                </nt-form-item>
+                <nt-view class="form__action">
+                  <nt-submit class="form__sub-btn" @submit="onSubmitCheck">核 查</nt-submit>
+                  <nt-button @click="handleprint" disabled>打 印</nt-button>
+                  <nt-button @click="handleClose" disabled="{{ resultData.resultCode === null }}">返 回</nt-button>
+                </nt-view>
+              </nt-view>
+              <nt-view class="avatar" nt:if="{{ idCardAvatarPath }}">
+                <img class="avatar-img" src="{{ idCardAvatarPath }}" />
+              </nt-view>
+            </nt-view>
+          </nt-layout>
+        </nt-form>
+      </nt-view>
+    </nt-view>
+    <nt-view class="c-onlinecheck-result" nt:if="{{ resultData.resultCode !== null }}">
+      <nt-form model="{{ resultData }}" nt:bind="{{ formAttr }}" label-width="100px">
+        <nt-layout header="身份核查结果">
+          <nt-view style="display: flex;justify-content: space-between;flex:1;">
+            <nt-view>
+              <nt-form-item label="核查结果">
+                <nt-select v-model="resultData.resultCode" disabled>
+                  <nt-option nt:for="opt in checkResultOptions" key="{{ opt.value }}" label="{{ opt.label }}"
+                    value="{{ opt.value }}"></nt-option>
+                </nt-select>
+              </nt-form-item>
+              <nt-form-item label="签发机关">
+                <!-- 需要替换为 textarea -->
+                <nt-input type="text" v-model="resultData.checkDepartment" disabled></nt-input>
+              </nt-form-item>
+              <nt-form-item label="姓名">
+                <nt-input v-model="resultData.checkName" disabled></nt-input>
+              </nt-form-item>
+              <nt-form-item label="证件号码">
+                <nt-input v-model="resultData.checkNo" disabled></nt-input>
+              </nt-form-item>
+            </nt-view>
+            <nt-view class="avatar">
+              <img class="avatar-img" src="{{ resultData.avatar }}" />
+            </nt-view>
+          </nt-view>
+        </nt-layout>
+        <nt-layout header="人脸识别结果">
+          <nt-view style="display: flex;justify-content: space-between;flex:1;">
+            <nt-view>
+              <!-- <nt-form-item label="摄像头类型">
+                <nt-select v-model="ocrData.ocrType" disabled>
+                  <nt-option nt:for="opt in checkReasonType" key="{{ opt.value }}" label="{{ opt.label }}"
+                    value="{{ opt.value }}"></nt-option>
+                </nt-select>
+              </nt-form-item> -->
+              <nt-form-item label="相似度">
+                <nt-input v-model="ocrData.smDgrRto" disabled></nt-input>
+              </nt-form-item>
+              <nt-form-item label="识别结果">
+                <nt-input v-model="ocrData.smDgrRtoRslt" fieldName="checkReason" disabled></nt-input>
+              </nt-form-item>
+              <nt-view>
+                <nt-button @click="handleCamera" disabled="{{ resultData.resultCode !== '0' }}">拍 照</nt-button>
+                <nt-button @click="handleCompare" disabled="{{ resultData.resultCode !== '0' || !ocrData.avatar }}">
+                  对 比
+                </nt-button>
+              </nt-view>
+            </nt-view>
+          </nt-view>
+          <nt-view class="avatar">
+            <img class="avatar-img" src="{{ ocrData.avatar }}" />
+          </nt-view>
+        </nt-layout>
+      </nt-form>
+    </nt-view>
+  </nt-view>
+</nt-dialog>

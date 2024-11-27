@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "nt-select-idtype": "public/components/nt-select-idtype/index",
+    "nt-input-personidnum": "public/components/nt-input-personidnum/index",
+    "nt-input-mobile": "public/components/nt-input-mobile/index",
+    "nt-onlinecheck": "public/components/nt-onlinecheck/index"
+  }
+}

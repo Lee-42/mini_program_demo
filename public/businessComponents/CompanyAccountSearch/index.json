@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "nt-input-account": "public/components/nt-input-account/index",
+    "nt-input-companynum": "public/components/nt-input-companynum/index",
+    "nt-querylist": "public/components/nt-querylist/index"
+  }
+}

@@ -1,0 +1,15 @@
+/* public\components\nt-input-money\index\index.ntss */
+.sum-dialog{
+    :deep(.nt-dialog__body){
+        padding:0px;
+    }
+    :deep(.nt-dialog__footer){
+        padding:0px;
+    }
+}
+.dh-form-item {
+    display: flex;
+    .dh-input {
+        flex: 1;
+    }
+}

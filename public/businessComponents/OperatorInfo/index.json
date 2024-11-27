@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "nt-select-idtype": "public/components/nt-select-idtype/index",
+    "nt-input-personidnum": "public/components/nt-input-personidnum/index",
+    "nt-querylist": "public/components/nt-querylist/index"
+  }
+}

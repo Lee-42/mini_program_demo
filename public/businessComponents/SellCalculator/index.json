@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "nt-input-money": "public/components/nt-input-money/index"
+  }
+}

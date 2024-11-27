@@ -1,0 +1,15 @@
+<nt-view style="display: flex;flex-wrap: wrap;">
+    <nt-form-item label="操作员号" prop="oprNo">
+        <nt-input v-model="formModel.oprNo" fieldName="oprNo" disabled></nt-input>
+    </nt-form-item>
+    <nt-form-item class="nt-layout-block" label="操作员姓名" prop="oprNm">
+        <nt-input v-model="formModel.oprNm" fieldName="oprNm" disabled></nt-input>
+    </nt-form-item>
+    <nt-select-idtype label="证件类型" v-model="formModel.identTp" fieldName="identTp" disabled />
+    <nt-input-personidnum label="证件号码" v-model="formModel.identNo" fieldName="identNo"
+        cardType="{{ formModel.identTp }}" isToUpperCase isShowTextLength disabled operType="2" />
+    <nt-form-item class="nt-layout-block" label="所属角色">
+        <nt-querylist style="width: 100%;" tableConfigs="{{ roleTableConfigs }}" tableData="{{ roleList }}"
+            isPrint="{{ false }}" isSelect="{{ false }}" />
+    </nt-form-item>
+</nt-view>

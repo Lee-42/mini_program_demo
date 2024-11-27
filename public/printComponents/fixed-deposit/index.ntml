@@ -1,0 +1,98 @@
+<view>
+  <view class="pdf" id="fixed-deposit" title="6">
+    <view :style="{background:`url(${base_start})no-repeat`}"
+      style="position: relative; height: 800px;background-size: 100% 100%;font-size:16px;">
+      <view style="position: absolute;left: 23%;top:75px;width:32%">{{datas.acctNo}}</view>
+      <view style="position: absolute;left: 23%;top:125px;width:32%">{{datas.acctNm}}</view>
+      <view style="position: absolute;left: 23%;top:175px;width:32%">{{datas.drawType}}</view>
+      <view style="position: absolute;left: 23%;top:225px;width:32%">{{datas.acctDate}}</view>
+      <view style="position: absolute;left: 23%;top:275px;width:32%">{{datas.openBrNo}}</view>
+      <view style="position: absolute; left: 70%;top:180px;width:30%">{{datas.teller}}</view>
+      <view
+        style="display: grid;position: absolute;left: 7%;width: 90%;top: 435px;grid-template-columns: 1fr 1fr 1fr;text-align: center;gap: 5px 130px;">
+        <view>{{firstAcTitle.acctNo}}</view>
+        <view>{{firstAcTitle.acctSeqn}}</view>
+        <view>{{firstAcTitle.currency}}</view>
+        <view>{{firstAcTitle.amt}}</view>
+        <view>{{firstAcTitle.acctDate}}</view>
+        <view>{{firstAcTitle.endDate }}</view>
+        <view>{{firstAcTitle.period}}</view>
+        <view>{{firstAcTitle.rate}}</view>
+        <view>{{firstAcTitle.autoFlag}}</view>
+      </view>
+      <view style="position: absolute;left:5.5%; width: 94.5%;height:200px; top:550px;">
+        <view style="position: absolute;width: 100%; display: flex;text-align: center;"
+          :style="{top: `${l.index*29}px`}" nt:for="l in start">
+          <view style="width: 10.5%;">{{l.subAcData}}</view>
+          <view style="width: 7.5%;">{{l.abstract}}</view>
+          <view style="width: 10.5%;">{{l.valueDate}}</view>
+          <view style="width: 7.5%;">{{l.type}}</view>
+          <view style="width: 7.5%;">{{l.period}}</view>
+          <view style="width: 21.5%;">{{l.amt}}</view>
+          <view style="width: 16.5%;">{{l.rate}}</view>
+          <view style="width: 8%;">{{l.operatop}}</view>
+          <view style="width: 10%;">{{l.cashier}}</view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+  <view class="pdf" id="fixed-deposit" title="7">
+    <view :style="{background:`url(${base_content})no-repeat`}"
+      style="position: relative; height: 800px;background-size: 100% 100%;font-size:16px;">
+      <view
+        style="display: grid;position: absolute;left: 7%;width: 90%;top: 35px;grid-template-columns: 1fr 1fr 1fr;text-align: center;gap: 5px 130px;">
+        <view>{{test.acctNo}}</view>
+        <view>{{test.acctSeqn}}</view>
+        <view>{{test.currency}}</view>
+        <view>{{test.amt}}</view>
+        <view>{{test.acctDate}}</view>
+        <view>{{test.endDate }}</view>
+        <view>{{test.period}}</view>
+        <view>{{test.rate}}</view>
+        <view>{{test.autoFlag}}</view>
+      </view>
+      <view style="position: absolute;left:4.5%; width: 94.5%;height:200px; top:155px;">
+        <view style="position: absolute;width: 100%; display: flex;text-align: center;"
+          :style="{top: `${l.index*29}px`}" nt:for="l in start">
+          <view style="width: 10.5%;">{{l.subAcData}}</view>
+          <view style="width: 7.5%;">{{l.abstract}}</view>
+          <view style="width: 10.5%;">{{l.valueDate}}</view>
+          <view style="width: 7.5%;">{{l.type}}</view>
+          <view style="width: 7.5%;">{{l.period}}</view>
+          <view style="width: 21.5%;">{{l.amt}}</view>
+          <view style="width: 16.5%;">{{l.rate}}</view>
+          <view style="width: 8%;">{{l.operatop}}</view>
+          <view style="width: 10%;">{{l.cashier}}</view>
+        </view>
+      </view>
+      <view
+        style="display: grid;position: absolute;left: 7%;width: 90%;top: 435px;grid-template-columns: 1fr 1fr 1fr;text-align: center;gap: 5px 130px;">
+        <view>{{test.acctNo}}</view>
+        <view>{{test.acctSeqn}}</view>
+        <view>{{test.currency}}</view>
+        <view>{{test.amt}}</view>
+        <view>{{test.acctDate}}</view>
+        <view>{{test.endDate }}</view>
+        <view>{{test.period}}</view>
+        <view>{{test.rate}}</view>
+        <view>{{test.autoFlag}}</view>
+      </view>
+      <view style="position: absolute;left:4.5%; width: 94.5%;height:200px; top:550px;">
+        <view style="position: absolute;width: 100%; display: flex;text-align: center;"
+          :style="{top: `${l.index*29}px`}" nt:for="l in start">
+          <view style="width: 10.5%;">{{l.subAcData}}</view>
+          <view style="width: 7.5%;">{{l.abstract}}</view>
+          <view style="width: 10.5%;">{{l.valueDate}}</view>
+          <view style="width: 7.5%;">{{l.type}}</view>
+          <view style="width: 7.5%;">{{l.period}}</view>
+          <view style="width: 21.5%;">{{l.amt}}</view>
+          <view style="width: 16.5%;">{{l.rate}}</view>
+          <view style="width: 8%;">{{l.operatop}}</view>
+          <view style="width: 10%;">{{l.cashier}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

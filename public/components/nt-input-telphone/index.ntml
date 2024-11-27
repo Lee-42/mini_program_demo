@@ -1,0 +1,16 @@
+<!-- public\components\inputMobile\inputMobile\inputMobile.ntml -->
+<nt-form-item
+  :label="label"
+  :prop="fieldName"
+  :required="required"
+  :ntValidator="phoneNumberValidate"
+>
+  <nt-input
+    nt:bind="$attrs"
+    type="text"
+    v-model="telphone"
+    minlength="7"
+    :fieldName="fieldName"
+    maxlength="13"
+  ></nt-input>
+</nt-form-item>

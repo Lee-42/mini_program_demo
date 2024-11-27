@@ -1,0 +1,64 @@
+<!-- public\components\table\table\table.ntml -->
+<view>
+  <div class="{{ align }}">
+    <nt-submit type="primary" class="btn" nt:if="isValidate" @submit="handleClickEvent" :disabled="disabled">
+      <slot></slot>
+    </nt-submit>
+    <nt-button class="btn" nt:else @click="handleClickEvent" :disabled="disabled">
+      <slot></slot>
+    </nt-button>
+  </div>
+
+  <!-- 打印插槽 -->
+  <slot name="print" :printData="printData"></slot>
+
+  <!-- 收费弹窗 -->
+  <nt-dialog width="60%" center v-model="feeVisible" :before-close="handleClose" title="收费说明">
+    <template #default>
+      <nt-view>
+        <nt-title title="收费明细"></nt-title>
+        <nt-table :data="tableList">
+          <nt-table-column label="序号" type="index" align="center" width="90" />
+          <nt-table-column align="center" prop="costNm" label="收费条目"></nt-table-column>
+          <nt-table-column align="center" prop="rcvblsAmt" label="应收金额"></nt-table-column>
+          <nt-table-column align="center" prop="ofclRcptsAmt" label="实收金额"></nt-table-column>
+        </nt-table>
+      </nt-view>
+
+      <nt-view>
+        <nt-title title="收费汇总"></nt-title>
+        <nt-form label-width="100px" :model="dialogForm" inline>
+          <nt-form-item label="总金额" class="nt-layout-row-4" prop="chrgTotAmt">
+            <nt-input v-model="dialogForm.chrgTotAmt" fieldName="chrgTotAmt" disabled></nt-input>
+          </nt-form-item>
+          <nt-form-item label="收费方式" class="nt-layout-row-4" prop="chrgMd">
+            <nt-select v-model="dialogForm.chrgMd" fieldName="chrgMd" ntValidator="{{ onChrgMdValidate }}">
+              <nt-option :label="item.label" :value="item.value" nt:for="item in chargeTypeList"></nt-option>
+            </nt-select>
+          </nt-form-item>
+          <template nt:if="{{ dialogForm.chrgMd === '3' }}">
+            <!-- <nt-form-item label="扣费账号" class="nt-layout-row-4" prop="wthdAcctNo" required
+              ntValidator="onWthdAcctNoValidate">
+              <nt-input v-model="dialogForm.wthdAcctNo" fieldName="wthdAcctNo"></nt-input>
+            </nt-form-item> -->
+            <nt-input-account label="扣费账号" v-model="formModel.wthdAcctNo" fieldName="wthdAcctNo"
+              ntValidator="{{ onWthdAcctNoValidate }}" ICJson="{{ ICJson }}" operType="3" required />
+            <nt-form-item label="账户序号" class="nt-layout-row-4" prop="wthdAcctSrlNo">
+              <nt-input v-model="dialogForm.wthdAcctSrlNo" fieldName="wthdAcctSrlNo" disabled></nt-input>
+            </nt-form-item>
+            <nt-form-item label="户 名" class="nt-layout-block" prop="wthdAcctNm">
+              <nt-input v-model="dialogForm.wthdAcctNm" fieldName="wthdAcctNm" disabled></nt-input>
+            </nt-form-item>
+            <nt-input-password label="密 码" v-model="formModel.wthdAcctPswd" fieldName="wthdAcctPswd"
+              ntValidator="{{ onPwdValidate }}" passwordJson="{{ passwordJson }}" required :pwdOptions="{
+                acctNo: formModel.wthdAcctNo,
+              }" acctNm="wthdAcctNo" />
+          </template>
+        </nt-form>
+      </nt-view>
+    </template>
+    <template #footer>
+      <nt-button class="dt-btn-blue-small" bindtap="dialogSubmit">确定</nt-button>
+    </template>
+  </nt-dialog>
+</view>

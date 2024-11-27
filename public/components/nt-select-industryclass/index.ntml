@@ -1,0 +1,18 @@
+
+<nt-form-item
+  :label="label"
+  :prop="fieldName"
+  :required="required"
+  :ntValidator="industryclassValidator"
+
+>
+  <nt-cascader nt:bind="$attrs" 
+    v-model="industryclass"
+    :options="options"
+    :props="props"
+    @change="handleChange"
+    
+    :fieldName="fieldName"
+    clearable
+  ></nt-cascader>
+</nt-form-item>

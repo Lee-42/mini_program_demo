@@ -1,0 +1,10 @@
+<nt-layout border :header="header">
+    <nt-input-account label="客户账户" required fieldName="tb_Acno" maxlength="19" show-word-limit isUseEquip autoCollect
+        v-model="formModel.tb_Acno" :ntValidator="tb_Acno_LostFocus"></nt-input-account>
+    <!-- <nt-form-item prop="tb_Acno" label="客户账户">
+        <nt-input fieldName="tb_Acno" v-model="formModel.tb_Acno"></nt-input>
+    </nt-form-item> -->
+    <nt-form-item prop="tb_Acseqn" label="账户序号">
+        <nt-input fieldName="tb_Acseqn" disabled v-model="formModel.tb_Acseqn"></nt-input>
+    </nt-form-item>
+</nt-layout>

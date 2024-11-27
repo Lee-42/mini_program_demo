@@ -1,0 +1,34 @@
+<person-receipt>
+  <template #left>
+    <div style="width: 50%;">收款户名：{{printDatas.TB_HM1||"---"}}</div>
+    <div style="width: 25%;">币种：{{printDatas.TB_BZ||"---"}}</div>
+    <div style="width: 25%;">钞汇标志：{{printDatas.TB_CHBZ||"---"}}</div>
+    <div style="width: 50%;">收款账号：{{printDatas.TB_Acno1||"---"}}</div>
+    <div style="width: 50%;">账户序号：{{printDatas.TB_ZHXH||"---"}}</div>
+    <div style="width: 50%;">交易金额：{{printDatas.TB_TxAmt1||"---"}}</div>
+    <div style="width: 50%;">入息账号：{{printDatas.TB_RXZH1||"---"}}</div>
+    <div nt:if="printDatas.TB_RXHM" style="width: 50%;">入息户名:{{printDatas.TB_RXHM}}</div>
+    <div style="width: 50%;">存期：{{printDatas.TB_Term1||"---"}}</div>
+    <div style="width: 50%;">利率：{{printDatas.TB_Rate1||"---"}}</div>
+    <div style="width: 50%;">到期日期：{{printDatas.TB_DQRQ||"---"}}</div>
+    <div style="width: 50%;">自动约转：{{printDatas.TB_ZDYZ||"---"}}</div>
+    <div style="width: 50%;">约定划转金额：{{printDatas.TB_HZJE||"---"}}</div>
+    <div style="width: 50%;">约定划转金额：{{printDatas.TB_HZJE2||"---"}}</div>
+    <div style="width: 50%;">本人证件：{{printDatas.TB_BRZJ||"---"}}</div>
+    <div style="width: 50%;">到期日期：{{printDatas.TB_DQRQ2||"---"}}</div>
+    <div style="width: 50%;">代理人名：{{printDatas.TB_DLRM||"---"}}</div>
+    <div style="width: 50%;">代理人证件：{{printDatas.TB_DLRZJ||"---"}}</div>
+  </template>
+  <template #right>
+    <div>收款户名：{{printDatas.TB_HM2||"---"}}</div>
+    <div>收款账号：{{printDatas.TB_Acno2||"---"}}</div>
+    <div>交易金额：{{printDatas.TB_TxAmt2||"---"}}</div>
+    <div>入息账号：{{printDatas.TB_RXZH2||"---"}}</div>
+    <div nt:if="printDatas.TB_RXHM2">入息户名：{{printDatas.TB_RXHM2}}</div>
+    <div>利率：{{printDatas.TB_Rate2||"---"}}</div>
+    <div>存期：{{printDatas.TB_Term2||"---"}}</div>
+    <div>经办柜员：{{printDatas.TB_Teller2||"---"}}</div>
+    <div>币种：{{printDatas.TB_BZ2||"---"}}</div>
+    <div>钞汇标志：{{printDatas.TB_CHBZ2||"---"}}</div>
+  </template>
+</person-receipt>

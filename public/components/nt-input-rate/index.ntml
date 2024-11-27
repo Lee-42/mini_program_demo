@@ -1,0 +1,8 @@
+<!-- <nt-form-item prop="rate"> -->
+<nt-form-item :prop="fieldName" :ntValidator="rateRule" :label="label" :required="required">
+
+    <nt-input nt:bind="$attrs" :isFuc="true" ref="inputZ" v-model="rate" @input="handleInput" :fieldName="fieldName">
+        <template #suffix>
+            % </template>
+    </nt-input>
+</nt-form-item>

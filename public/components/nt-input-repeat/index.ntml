@@ -1,0 +1,14 @@
+<!-- <br>
+preValue------{{preValue}}
+<br>
+dbValue------{{dbValue}}
+<br> -->
+<nt-form-item :label="label" :prop="fieldName" :required="required" :ntValidator="dbRule">
+
+  <nt-input nt:bind="$attrs" ref="input" type="text" v-model="dbValue" :fieldName="fieldName">
+
+    <template #suffix>
+      <slot></slot>
+    </template>
+  </nt-input>
+</nt-form-item>

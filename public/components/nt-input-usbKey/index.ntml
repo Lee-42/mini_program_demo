@@ -1,0 +1,6 @@
+<nt-form-item label="{{ label }}" prop="{{ fieldName }}" ntValidator="{{ validate }}" required="{{ required }}">
+  <nt-input fieldName="{{ fieldName }}" maxlength="{{ maxlength }}" show-word-limit readonly="{{ isReadonly }}"
+    disabled="{{ disabled }}" nt:bind="$attrs" @focus.once="handleFocus" isFuc="{{ manualCollect }}" @func="onmanual"
+    nt:on="$listeners">
+  </nt-input>
+</nt-form-item>

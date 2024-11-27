@@ -1,0 +1,13 @@
+{
+  "component": true,
+  "usingComponents": {
+    "nt-input-password": "public/components/nt-input-password/index",
+    "nt-select-idtype": "public/components/nt-select-idtype/index",
+    "nt-input-personidnum": "public/components/nt-input-personidnum/index",
+    "nt-input-telphone": "public/components/nt-input-telphone/index",
+    "nt-input-mobile": "public/components/nt-input-mobile/index",
+    "nt-querylist": "public/components/nt-querylist/index",
+    "nt-onlinecheck": "public/components/nt-onlinecheck/index",
+    "nt-input-usbKey": "public/components/nt-input-usbKey/index"
+  }
+}

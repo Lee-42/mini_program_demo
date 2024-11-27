@@ -1,0 +1,39 @@
+<!-- 1:只允许调用外设,需要设置是主动触发还是自动触发属性 -->
+<nt-form-item nt:if="Number(operType)==1" :prop="fieldName" :ntValidator="personidnumRule" :label="label"
+    :required="required">
+    <nt-input @focus="handleFocus" nt:bind="$attrs" :isFuc="true" @func="customFocus" style="float: left;" ref="inputZ"
+        v-model="personidnum" @input="handleInput" :fieldName="fieldName" show-word-limit="{{ isShowTextLength }}"
+        :maxlength="maxlength">
+        <template #suffix>
+            采集
+        </template>
+    </nt-input>
+</nt-form-item>
+
+
+<!-- 2.只允许手动输入，输入两次校验 -->
+<nt-input-repeat ref="repeat" @focus="handleFocus" nt:if="Number(operType)==2" :isFuc="false" @func="customFocus"
+    nt:bind="$attrs" :label="label" v-model="personidnum" :maxlength="maxlength" show-word-limit :fieldName="fieldName"
+    @input="handleInput2" :required="required" preValidator="{{ onIdentNoValidate2 }}"
+    ntValidator="{{ personidnumRule2 }}" />
+
+
+
+<!-- 3.允许手动输入或调用外设，操作者自选，只允许主动触发，不允许自动触发 -->
+<nt-input-repeat ref="repeat" nt:if="Number(operType)==3" @focus="handleFocus" :isFuc="true" @func="customFocus"
+    nt:bind="$attrs" :label="label" v-model="personidnum" :maxlength="maxlength" show-word-limit :fieldName="fieldName"
+    @input="handleInput2" :required="required" preValidator="{{ onIdentNoValidate2 }}"
+    ntValidator="{{ personidnumRule2 }}">
+    采集
+</nt-input-repeat>
+
+
+<!-- 4:手输且只输入一次，只校验输入的合法性 -->
+<nt-form-item nt:if="Number(operType)==4" :prop="fieldName" :ntValidator="personidnumRule" :label="label"
+    :required="required">
+    <nt-input @focus="handleFocus" nt:bind="$attrs" :isFuc="true" @func="customFocus" style="float: left;" ref="inputZ"
+        v-model="personidnum" @input="handleInput" :fieldName="fieldName" show-word-limit="{{ isShowTextLength }}"
+        :maxlength="maxlength">
+
+    </nt-input>
+</nt-form-item>

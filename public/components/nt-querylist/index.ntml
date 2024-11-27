@@ -1,0 +1,54 @@
+<view>
+  <!-- 筛选表单部分 -->
+  <template class="filter-form" nt:if="formConfigs.length>0 && hideSearch">
+    <nt-form-item prop="selectValue">
+      <nt-select fieldName="{{`selectValue_${id}`}}" placeholder="请选择筛选条件" v-model="formModel.selectValue">
+        <slot nt:for="o in formConfigs">
+          <nt-option :label="o.label" :value="o.value" />
+        </slot>
+      </nt-select>
+    </nt-form-item>
+    <nt-form-item prop="inputValue">
+      <nt-input fieldName="{{`inputValue_${id}`}}" @input="fuzzyFilter" placeholder="请输入"
+        v-model="formModel.inputValue" />
+    </nt-form-item>
+  </template>
+  <div id="focusDiv" tabindex="0" @focus="handleFocus" @blur="handleBlur">
+    <!-- 表格部分 -->
+    <nt-table nt:bind="tableProps" @row-click="handleRowClick" @cell-click="handleCellClick"
+      :current-change="handleCurrentRowChange" :highlight-current-row="true" :data="currentPageData"
+      :header-row-class-name="headerClass" ref="tableRef" @selection-change="handleSelectionChange">
+      <nt-table-column type="selection" width="55" nt:if="isSelect && tableConfigs.length > 0" />
+      <nt-table-column label="序号" align="center" nt:if="tableConfigs.length > 0 && showIndex" type="index" width="60" />
+      <nt-table-column nt:for="item in tableConfigs" align="center" :sortable="isSortable" width="180" :prop="item.prop"
+        :label="item.label" nt:bind="item.attrs">
+        <template nt:if="item.prop" #default="scope">
+          <!-- 使用外部传入的动态插槽 -->
+          <slot :name="item.prop" :row="scope.row" :index="scope.$index"></slot>
+        </template>
+
+        <template nt:if="item.prop&&item.options" #default="scope">
+          <span>{{
+                        item.options
+                        ? item.options[scope.row[item.prop]]
+                        : scope.row[item.prop]
+                        }}</span> </template>
+
+      </nt-table-column>
+      <nt-table-column label="操作" align="center" width="120" fixed="{{ actionFixed }}" nt:if="hasActions">
+        <template #default="scope">
+          <slot name="actions" :row="scope.row" :index="scope.$index"></slot>
+        </template>
+      </nt-table-column>
+    </nt-table>
+  </div>
+  <!-- 分页部分 -->
+  <div class="pagination" style="display: flex; justify-content: center; padding-top: 10px">
+    <nt-pagination nt:if="total > 0 " ref="pageRef" v-model:current-page="currentPage" v-model:page-size="pageSize"
+      :page-sizes="pageSizes" small background :total="parseInt(total)" @size-change="handleSizeChange"
+      @current-change="handleCurrentChange" />
+    <div style="width: 20px"></div>
+    <nt-button link nt:if="isPrint" type="primary" size="default" @click="printPdfUnit">打印</nt-button>
+    <nt-button link nt:if="isExport" type="primary" size="default" @click="printExcelUnit">导出</nt-button>
+  </div>
+</view>

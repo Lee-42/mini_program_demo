@@ -1,0 +1,438 @@
+:root {
+
+  --button_background_color: #6049e5;
+  /*默认按钮 背景色 */
+  --button_font_color: #fff;
+  /* 默认按钮 文字颜色*/
+  --button_border_color: #6049e5;
+  /* 默认按钮 边框颜色 */
+  --button_hover_color: #8480ee;
+  /* 默认按钮 鼠标悬浮 背景色 */
+
+  --button_plain_background_color: transparent;
+  /* plain 按钮 背景色 */
+  --button_plain_font_color: #6049e5;
+  /* plain 按钮 文字颜色 */
+  --button_plain_border_color: transparent;
+
+  /* plain 按钮 边框颜色 */
+  --button_link_background_color: transparent;
+
+  /* plain 按钮 鼠标悬浮 背景色 */
+  --button_plain_hover_color: #f3f2fe;
+
+  /* link 按钮 背景色 */
+  --button_link_font_color: #6049e5;
+  /* link 按钮 文字颜色 */
+  --button_link_border_color: transparent;
+  /* link 按钮 边框颜色 */
+
+  --table_th_background_color: #F5F7FA;
+  /* 表格 表头 背景色*/
+  --table_th_font_color: #fff;
+  /* 表格 表头 文字颜色*/
+
+  --checkbox_background_color: #6049e5;
+  /* checkbox 背景色*/
+
+  --pagination_activePage_background_color: transparent;
+  /* 分页 激活页码 的背景色*/
+
+  --pagination_activePage_font_color: #6049e5;
+  /* 分页 激活页码 的文字颜色*/
+
+  --pagination_activePage_border_color: #6049e5;
+  /* 分页 激活页码 的边框颜色*/
+
+  --pagination_page_border_color: #d9d9d9;
+  /* 分页 未激活页码 的边框颜色*/
+
+  --pagination_page_background_color: transparent;
+  /* 分页 未激活页码 的背景色*/
+
+  --pagination_page_font_color: #303133;
+  /* 分页 未激活页码 的文字颜色*/
+
+  --select_focus_border_color: #6049e5;
+  /* select 聚焦时 边框颜色*/
+  --select_dropdown_selected_font_color: #6049e5;
+  /* select 下拉菜单选中选项 文字颜色*/
+
+  --input-focus-border-color: #6049e5;
+  /* input 聚焦时 边框颜色 */
+
+  --nt-input-height-primary: 32px;
+  /* input 默认 高度 */
+
+  --nt-input-width-primary: 200px;
+  /* input 默认 宽度 */
+
+  --date_select_background_color: #6049e5;
+  /* 日期框 选中 背景色*/
+
+  --tabs_active_background_color: #6049e5;
+  /* tab 激活背景色*/
+
+  --textarea_focus_border_color: #6049e5;
+  /* textarea 聚焦时 边框颜色*/
+
+  --tree_select_background_color: #efeefc;
+  /* tree 选中背景颜色*/
+
+  --nt-table-font-color: #888aa8;
+  /* table 数据文本颜色 */
+
+}
+
+:root {
+  color-scheme: light;
+  --nt-color-primary: #6049e5;
+  --nt-color-primary-light-3: #8480ee;
+  --nt-color-primary-light-5: #9b98ed;
+  --nt-color-primary-light-7: #b8b6ea;
+  --nt-color-primary-light-8: #cccbeb;
+  --nt-color-primary-light-9: #fff;
+  --nt-color-primary-dark-2: #5550e7;
+  --nt-color-success: #67c23a;
+  --nt-color-success-light-3: #95d475;
+  --nt-color-success-light-5: #b3e19d;
+  --nt-color-success-light-7: #d1edc4;
+  --nt-color-success-light-8: #e1f3d8;
+  --nt-color-success-light-9: #f0f9eb;
+  --nt-color-success-dark-2: #529b2e;
+  --nt-color-warning: #B37C3A;
+  --nt-color-warning-light-3: #caa375;
+  --nt-color-warning-light-5: #d9be9d;
+  --nt-color-warning-light-7: #e8d8c4;
+  --nt-color-warning-light-8: #f0e5d8;
+  --nt-color-warning-light-9: #f7f2eb;
+  --nt-color-warning-dark-2: #8f632e;
+  --nt-color-danger: #FA0202;
+  --nt-color-danger-light-3: #fc4e4e;
+  --nt-color-danger-light-5: #fd8181;
+  --nt-color-danger-light-7: #feb3b3;
+  --nt-color-danger-light-8: #fecccc;
+  --nt-color-danger-light-9: #ffe6e6;
+  --nt-color-danger-dark-2: #c80202;
+  --nt-color-error: #f56c6c;
+  --nt-color-error-light-3: #f89898;
+  --nt-color-error-light-5: #fab6b6;
+  --nt-color-error-light-7: #fcd3d3;
+  --nt-color-error-light-8: #fde2e2;
+  --nt-color-error-light-9: #fef0f0;
+  --nt-color-error-dark-2: #c45656;
+  --nt-color-info: #909399;
+  --nt-color-info-light-3: #b1b3b8;
+  --nt-color-info-light-5: #c8c9cc;
+  --nt-color-info-light-7: #dedfe0;
+  --nt-color-info-light-8: #e9e9eb;
+  --nt-color-info-light-9: #f4f4f5;
+  --nt-color-info-dark-2: #73767a;
+  --nt-bg-color: #ffffff;
+  --nt-bg-color-page: #f2f3f5;
+  --nt-bg-color-overlay: #ffffff;
+  --nt-text-color-primary: #303133;
+  --nt-text-color-regular: #252526;
+  --nt-text-color-secondary: #909399;
+  --nt-text-color-placeholder: #a8abb2;
+  --nt-text-color-disabled: #c0c4cc;
+  --nt-border-color: #dcdfe6;
+  --nt-border-color-light: #e4e7ed;
+  --nt-border-color-lighter: #ebeef5;
+  --nt-border-color-extra-light: #f2f6fc;
+  --nt-border-color-dark: #d4d7de;
+  --nt-border-color-darker: #cdd0d6;
+  --nt-fill-color: #f0f2f5;
+  --nt-fill-color-light: #f5f7fa;
+  --nt-fill-color-lighter: #fafafa;
+  --nt-fill-color-extra-light: #fafcff;
+  --nt-fill-color-dark: #ebedf0;
+  --nt-fill-color-darker: #e6e8eb;
+  --nt-fill-color-blank: #ffffff;
+  --nt-box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, 0.04), 0px 8px 20px rgba(0, 0, 0, 0.08);
+  --nt-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.12);
+  --nt-box-shadow-lighter: 0px 0px 6px rgba(0, 0, 0, 0.12);
+  --nt-box-shadow-dark: 0px 16px 48px 16px rgba(0, 0, 0, 0.08), 0px 12px 32px rgba(0, 0, 0, 0.12), 0px 8px 16px -8px rgba(0, 0, 0, 0.16);
+  --nt-disabled-bg-color: var(--nt-fill-color-light);
+  --nt-disabled-text-color: var(--nt-text-color-placeholder);
+  --nt-disabled-border-color: var(--nt-border-color-light);
+  --nt-overlay-color: rgba(0, 0, 0, 0.8);
+  --nt-overlay-color-light: rgba(0, 0, 0, 0.7);
+  --nt-overlay-color-lighter: rgba(0, 0, 0, 0.5);
+  --nt-mask-color: rgba(255, 255, 255, 0.9);
+  --nt-mask-color-extra-light: rgba(255, 255, 255, 0.3);
+  --nt-border-width: 1px;
+  --nt-border-style: solid;
+  --nt-border-color-hover: var(--nt-text-color-disabled);
+  --nt-border: var(--nt-border-width) var(--nt-border-style) var(--nt-border-color);
+  --nt-svg-monochrome-grey: var(--nt-border-color);
+}
+
+.nt-input {
+  --nt-input-text-color: var(--nt-text-color-regular);
+  --nt-input-border: var(--nt-border);
+  --nt-input-hover-border: var(--nt-color-primary);
+  --nt-input-focus-border: var(--nt-color-primary);
+  --nt-input-transparent-border: 0 0 0 1px transparent inset;
+  --nt-input-border-color: var(--nt-border-color);
+  --nt-input-border-radius: var(--nt-border-radius-base);
+  --nt-input-bg-color: var(--nt-fill-color-blank);
+  --nt-input-icon-color: var(--nt-text-color-placeholder);
+  --nt-input-placeholder-color: var(--nt-text-color-placeholder);
+  --nt-input-hover-border-color: var(--nt-color-primary);
+  --nt-input-clear-hover-color: var(--nt-text-color-secondary);
+  --nt-input-focus-border-color: var(--nt-color-primary);
+  --nt-input-width: 100%;
+}
+
+.nt-select {
+  --nt-select-border-color-hover: var(--nt-color-primary);
+  --nt-select-disabled-color: var(--nt-disabled-text-color);
+  --nt-select-disabled-border: var(--nt-disabled-border-color);
+  --nt-select-font-size: var(--nt-font-size-base);
+  --nt-select-close-hover-color: var(--nt-text-color-secondary);
+  --nt-select-input-color: var(--nt-text-color-placeholder);
+  --nt-select-multiple-input-color: var(--nt-text-color-regular);
+  --nt-select-input-focus-border-color: var(--nt-color-primary);
+  --nt-select-input-font-size: 14px;
+  --nt-select-width: 100%;
+}
+
+/* scrollbar start */
+*::-webkit-scrollbar {
+  width: 3px !important;
+  height: 3px !important;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #919be3 !important;
+}
+
+.nt-scrollbar__thumb {
+  background-color: #919be3 !important;
+  transition: unset !important;
+  opacity: unset !important;
+}
+
+.nt-scrollbar__bar.is-horizontal {
+  height: 3px !important;
+}
+
+.nt-scrollbar__bar.is-vertical {
+  width: 3px !important;
+}
+
+/* scrollbar end */
+
+/* button start */
+.dt-btn-blue-small {
+  height: 32px !important;
+  background-color: var(--nt-color-primary) !important;
+  border-color: var(--nt-color-primary) !important;
+
+  &:hover {
+    background-color: var(--nt-color-primary-light-3) !important;
+    border-color: var(--nt-color-primary-light-3) !important;
+  }
+}
+
+.dt-btn-blue-plain-small {
+  border-color: var(--nt-color-primary) !important;
+  color: var(--nt-color-primary) !important;
+
+  &:hover {
+    background-color: #f3f2fe !important;
+  }
+}
+
+button.is-link {
+  background: var(--button_link_background_color) !important;
+  color: var(--button_link_font_color) !important;
+  border-color: var(--button_link_border_color) !important;
+}
+
+button[class$="-plain-large"],
+button[class$="-plain-small"] {
+  background-color: var(--button_plain_background_color) !important;
+  color: var(--button_plain_font_color) !important;
+}
+
+.dt-btn-blue-plain-small {
+  background-color: var(--button_plain_background_color) !important;
+  color: var(--button_plain_font_color) !important;
+
+  &:hover {
+    background-color: var(--button_plain_hover_color) !important;
+  }
+}
+
+
+
+/* 针对 dialog 中的 link 按钮 */
+.dialog button.is-link {
+  background: transparent !important;
+  color: var(--nt-button-text-color) !important;
+  border-color: transparent !important;
+}
+
+/* button end */
+
+/* table start */
+.nt-table th.nt-table__cell {
+  color: #000 !important;
+  background-color: var(--table_th_background_color) !important;
+}
+
+.nt-table .nt-table__cell.is-center {
+  text-align: start !important;
+}
+
+table thead tr th {
+  background: var(--table_th_background_color) !important;
+  color: var(--table_th_font_color) !important;
+}
+
+.nt-table td.nt-table__cell div {
+  color: var(--nt-table-font-color) !important;
+}
+
+/* table end */
+
+.nt-checkbox__input.is-indeterminate .nt-checkbox__inner,
+.nt-checkbox__input.is-checked .nt-checkbox__inner {
+  background-color: var(--checkbox_background_color) !important;
+  border-color: var(--checkbox_background_color) !important;
+}
+
+.nt-checkbox__input.is-checked+.nt-checkbox__label {
+  color: var(--checkbox_background_color) !important;
+}
+
+.nt-checkbox__inner:hover {
+  border-color: var(--checkbox_background_color) !important;
+}
+
+/* pagination start */
+.pagination ul li.is-active {
+  font-weight: normal;
+  background-color: var(--pagination_activePage_background_color) !important;
+  color: var(--pagination_activePage_font_color) !important;
+  border: 1px solid var(--pagination_activePage_border_color) !important;
+}
+
+.pagination ul li {
+  background-color: var(--pagination_page_background_color) !important;
+  color: var(--pagination_page_font_color) !important;
+  border: 1px solid var(--pagination_page_border_color) !important;
+
+  &:hover {
+    border-color: var(--pagination_activePage_font_color) !important;
+    color: var(--pagination_activePage_font_color) !important;
+  }
+}
+
+.nt-pagination button {
+  background-color: var(--pagination_page_background_color) !important;
+  border: 1px solid var(--pagination_page_border_color) !important;
+
+  &:hover {
+    color: var(--pagination_activePage_font_color);
+  }
+}
+
+@media screen and (max-width:870px) {
+  .pagination {
+    flex-direction: column !important;
+  }
+}
+
+/* pagination end */
+
+/* form start */
+/* .nt-form-item__label {
+  color: #888aa8;
+  font-size: 14px;
+  font-weight: 400;
+} */
+
+/* form end */
+
+.nt-select__wrapper.is-focused {
+  box-shadow: 0 0 0 1px var(--nt-color-primary) inset !important;
+}
+
+.nt-select__wrapper:hover {
+  box-shadow: 0 0 0 1px var(--nt-color-primary) inset !important;
+}
+
+
+.nt-select-dropdown__item.is-selected {
+  color: var(--select_dropdown_selected_font_color) !important;
+}
+
+.nt-input__wrapper.is-focus {
+  box-shadow: 0 0 0 1px var(--input-focus-border-color) inset;
+  color: var(--nt-color-primary) !important;
+}
+
+.nt-input {
+  height: var(--nt-input-height-primary);
+}
+
+.nt-input__inner:focus {
+  color: var(--nt-color-primary) !important;
+}
+
+.nt-input__inner {
+  color: var(--nt-input-text-color) !important;
+}
+
+.nt-date-table td.current:not(.disabled) .nt-date-table-cell__text {
+  background-color: var(--date_select_background_color) !important;
+}
+
+.nt-tabs__item.is-active {
+  color: var(--tabs_active_background_color) !important;
+}
+
+.nt-textarea__inner:hover {
+  box-shadow: 0 0 0 1px var(--textarea_focus_border_color) inset !important;
+}
+
+.nt-textarea__inner:focus {
+  color: var(--nt-color-primary) !important;
+  box-shadow: 0 0 0 1px var(--textarea_focus_border_color) inset !important;
+
+}
+
+.m-container .menu-left .treeList .nt-tree-node.is-current .nt-tree-node__content {
+  background-color: var(--tree_select_background_color) !important;
+}
+
+.nt-tree-node__content:hover {
+  background-color: var(#f5f7fa) !important;
+}
+
+.nt-title-line {
+  border-radius: 3px;
+  background-color: var(--nt-color-primary) !important;
+}
+
+.layout__header {
+  padding: 10px 20px !important;
+  background-color: unset !important;
+  color: #000 !important;
+}
+
+.layout__header::before {
+  transform: translateY(-50%);
+  top: 50%;
+  border-radius: 2px;
+  position: absolute;
+  left: 10px;
+  display: block;
+  content: "";
+  height: 18px;
+  width: 5px;
+  background-color: var(--nt-color-primary);
+}

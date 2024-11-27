@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "ntQuerylist": "public/components/nt-querylist/index"
+  }
+}

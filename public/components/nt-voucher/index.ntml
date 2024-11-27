@@ -1,0 +1,30 @@
+<view class="vchrKndTp">
+    <nt-form-item 
+        label="凭证种类" 
+        :ntValidator="VoucherValidator"
+        prop="vchrKndTp">
+        <nt-select 
+            fieldName="vchrKndTp" 
+            v-model="formModel.vchrKndTp">
+            <nt-option 
+                nt:for="item in options_VoucherType" 
+                :label="item.label" 
+                :value="item.value">
+            </nt-option>
+        </nt-select>
+    </nt-form-item>
+    <nt-input-voucherno
+        label="凭证号码"
+        :ntValidator="VoucherNumValidator"
+        :required="VoucherNum_required"
+        v-model="formModel.vchrNo"
+        fieldName="vchrNo"
+    ></nt-input-voucherno>
+    <nt-input-singledate
+        :ntValidator="CdateValidator"
+        label="出票日期"
+        v-model="formModel.dwBillDt"
+        fieldName="dwBillDt"
+        :required="Cdate_required"
+    ></nt-input-singledate>
+</view>

@@ -1,0 +1,25 @@
+<nt-layout border>
+    <template #header>搜索条件</template>
+    <nt-form-item label="电子银行客户号" prop="eleCstNo">
+        <nt-input v-model="formModel.eleCstNo" fieldName="eleCstNo"></nt-input>
+    </nt-form-item>
+    <nt-input-account label="银行账号" v-model="formModel.acctNo" fieldName="acctNo" ntValidator="{{ onAccountValidate }}"
+        operType="2" />
+    <nt-form-item label="证件类型" prop="identTp">
+        <nt-select v-model="formModel.identTp" fieldName="identTp">
+            <nt-option nt:for="opt in accountTypeList" key="{{ opt.value }}" value="{{ opt.value }}"
+                label="{{ opt.label }}"></nt-option>
+        </nt-select>
+    </nt-form-item>
+    <nt-input-companynum label="证件号码" v-model="formModel.identNo" fieldName="identNo" cardType="{{ formModel.identTp }}"
+        isToUpperCase isShowTextLength />
+    <nt-form-item class="nt-layout-block" label="企业名称" prop="acctNm">
+        <nt-input v-model="formModel.acctNm" fieldName="acctNm"></nt-input>
+    </nt-form-item>
+    <nt-view class="nt-layout-block" style="text-align: right; padding-right: 32px;">
+        <nt-button data-extem="true" type="primary" @click="onSearch" fieldName="companyAccountSearch">查询</nt-button>
+    </nt-view>
+    <nt-querylist style="margin-top: 18px;width: 100%;" tableConfigs="{{ accountTableConfigs }}"
+        tableData="{{ accountTableData }}" isSelect="{{ false }}" isPrint="{{ false }}"
+        @selectRow="onAccountSelected" />
+</nt-layout>

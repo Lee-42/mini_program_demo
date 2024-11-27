@@ -1,0 +1,10 @@
+{
+    "component": true,
+    "usingComponents": {
+        "nt-select-idtype": "public/components/nt-select-idtype/index",
+        "nt-input-personidnum": "public/components/nt-input-personidnum/index",
+        "nt-input-password": "public/components/nt-input-password/index",
+        "nt-input-account": "public/components/nt-input-account/index",
+        "nt-input-money": "public/components/nt-input-money/index"
+    }
+}

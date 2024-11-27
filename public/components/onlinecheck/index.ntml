@@ -1,0 +1,9 @@
+<!-- 联网核查控件 -->
+<nt-dialog v-model="dialogFormVisible" :title="title" width="75%" append-to-body @close="onOnlinecheckClose">
+    <nt-onlinecheck mainCd="{{ mainCode }}" checkIDNo="{{ checkId }}" formAttr="{{ { 'label-width': '100px' } }}"
+        @check="onOnlineCheck">
+        <template #action>
+            <nt-button @click="closeDialog">关闭</nt-button>
+        </template>
+    </nt-onlinecheck>
+</nt-dialog>

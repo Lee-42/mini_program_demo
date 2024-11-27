@@ -1,0 +1,14 @@
+<view>
+    <nt-dialog  v-model="visible" title="账户信息" style="width: 80%;">
+        <nt-form :model="formItem" ref="form" label-width="130px" inline>
+            <!-- T106025-T106025 -->
+            <nt-layout header="查询条件" >
+                <nt-form-item label="账号" prop="acctNo">
+                    <nt-input fieldName="acctNo" v-model="formItem.acctNo" disabled></nt-input>
+                </nt-form-item>
+                <nt-input-password label="密码" fieldName="tranPswd" required v-model="formItem.tranPswd" :isUseEquip="true" @useEquip="getPassword" :ntValidator="tranPswdValidator"></nt-input-password>
+            </nt-layout>
+            <nt-submit @submit="submit">确定</nt-submit>
+        </nt-form>
+    </nt-dialog>
+</view>

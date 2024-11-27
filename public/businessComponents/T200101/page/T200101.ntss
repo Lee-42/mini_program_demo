@@ -1,0 +1,17 @@
+/* select {
+width: 100%;
+height: 30px;
+border: 1px solid #ccc;
+border-radius: 5px;
+padding: 5px;
+font-size: 14px;
+}
+
+select:focus {
+outline: none;
+}
+
+option {
+padding: 5px;
+font-size: 14px;
+} */

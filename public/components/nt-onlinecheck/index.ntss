@@ -1,0 +1,17 @@
+/* public\components\onlinecheck\onlinecheck.ntss */
+
+.form__action {
+  display: flex;
+  justify-content: right;
+  padding-left: 60px;
+}
+
+.avatar {
+  margin-left: 50px;
+}
+
+.avatar-img {
+  width: 150px;
+  /* height: 150px; */
+  border: 1px solid var(--nt-border-color-light);
+}

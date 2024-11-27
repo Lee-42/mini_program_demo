@@ -1,0 +1,10 @@
+<!-- public\components\nt-input-begindate\index\index.ntml -->
+<view>
+    <nt-form-item :prop="fieldName" :label="label" :ntValidator="begindateRule" :required="required">
+        <nt-input nt:bind="$attrs" :isFuc="true"  ref="inputZ" v-model="begindate" :fieldName="fieldName" @input="handleInput" @blur="handleBlur">
+            <template #suffix>
+                <img style="width: 14px;" src="../assets/calendar.png"><img>
+              </template>
+        </nt-input>
+    </nt-form-item>
+</view>

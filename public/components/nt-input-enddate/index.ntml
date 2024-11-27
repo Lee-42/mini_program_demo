@@ -1,0 +1,13 @@
+<!-- public\components\nt-input-enddate\index\index.ntml -->
+<view>
+    <nt-form-item :prop="fieldName" :label="label" :ntValidator="enddateRule" :required="required">
+        <nt-input :isFuc="true" nt:bind="$attrs" ref="inputZ" v-model="enddate" :fieldName="fieldName"
+            @input="handleInput">
+            <template #suffix>
+                <img style="width: 14px;" src="../assets/calendar.png"><img>
+            </template>
+        </nt-input>
+    </nt-form-item>
+
+
+</view>

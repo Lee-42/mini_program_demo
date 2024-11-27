@@ -1,0 +1,29 @@
+<div ref="pdf" class="pdf" :data-fileName="name" data-formid="voucher20"
+  :style="`background: url(${base64})no-repeat;height:950px;box-sizing:border-box;background-size: 100% 100%;padding:95px 4% 180px 9%;`">
+  <!-- 本模板 650像素 为内容宽度 -->
+  <div
+    style="width:100%;display:flex;flex-direction:column;justify-content:space-between;align-items:center;font-size: 14px;">
+    <div style="display: flex;width: 100%;">
+      <span style="flex:1;">机构名称：{{ printData.tranBrchNm }}</span>
+      <span style="flex:1;">交易名称：{{ name }}({{ printData.tranCd }})</span>
+    </div>
+    <!-- 本模板纸张打印区域最大宽度只有600像素，不要超出否则打印预览的时候会换行 -->
+    <div style="margin: 10px 0; width:100%;height: 595px; overflow: hidden;">
+      <slot></slot>
+    </div>
+    <div style="
+          width: 100%;
+          display: grid;
+          grid-template-columns: repeat(3, 33%);
+          text-align: left;
+          font-size: 12px;
+        ">
+      <span>业务流水：{{ printData.flowNo }}</span>
+      <span>平台流水：{{ printData.coreSeqNo }}</span>
+      <span>经办柜员：{{ printData.tlrNo }}</span>
+      <span>柜员流水：{{ printData.tlrSeqNo }}</span>
+      <span>授权柜员：{{ printData.tlrNo }}</span>
+      <span>[{{ new Date().toLocaleString() }}]</span>
+    </div>
+  </div>
+</div>

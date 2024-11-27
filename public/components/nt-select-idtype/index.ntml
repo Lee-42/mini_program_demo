@@ -1,0 +1,11 @@
+<nt-form-item
+  :label="label"
+  :prop="fieldName"
+  :required="required"
+  :ntValidator="idtypeValidator"
+
+>
+  <nt-select nt:bind="$attrs"  v-model="idtype" :fieldName="fieldName">
+    <nt-option  nt:for="item in idenTypeList" :label="item.label" :value="item.value"></nt-option>
+  </nt-select>
+</nt-form-item>

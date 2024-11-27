@@ -1,0 +1,16 @@
+<nt-form-item
+  :label="label"
+  :prop="fieldName"
+  :required="required"
+  :ntValidator="adminiareaRule"
+>
+  <nt-cascader nt:bind="$attrs" 
+    v-model="area"
+    :options="options"
+    :props="props"
+    @change="handleChange"
+    
+    :fieldName="fieldName"
+    clearable
+  ></nt-cascader>
+</nt-form-item>

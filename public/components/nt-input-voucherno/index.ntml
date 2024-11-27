@@ -1,0 +1,5 @@
+<nt-form-item :label="label" :prop="fieldName" :required="required" :ntValidator="validate">
+
+  <nt-input nt:bind="$attrs" type="text" v-model="voucherno" :fieldName="fieldName"
+    @input="handleInputEvent"></nt-input>
+</nt-form-item>

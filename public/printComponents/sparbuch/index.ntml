@@ -1,0 +1,83 @@
+<view>
+  <view class="pdf" id="sparbuch" title="3" nt:if="start && start.length > 0">
+    <view :style="{background:`url(${base_start})no-repeat`}"
+      style="position: relative; height: 800px;background-size: 100% 100%;font-size:16px;">
+      <view style="position: absolute;left: 23%;top:75px;width:32%">{{datas.acctNo}}</view>
+      <view style="position: absolute;left: 23%;top:125px;width:32%">{{datas.acctNm}}</view>
+      <view style="position: absolute;left: 23%;top:175px;width:32%">{{datas.currency}}</view>
+      <view style="position: absolute;left: 23%;top:225px;width:32%">{{datas.acctDate}}</view>
+      <view style="position: absolute;left: 23%;top:275px;width:32%">{{datas.openBrNo}}</view>
+      <view style="position: absolute;left: 11%;top:325px;width: 11%;text-align: end;">利率 :</view>
+      <view style="position: absolute;left: 23%;top:325px;width:32%">{{datas.rate}}</view>
+      <view style="position: absolute;left: 70%;top:130px;width:30%">{{datas.depositType}}</view>
+      <view style="position: absolute;left: 70%;top:180px;width:30%">{{datas.drawMode}}</view>
+      <view style="position: absolute;left: 70%;top:230px;width:30%">{{datas.TCTD}}</view>
+      <view style="position: absolute;left:5%; width: 95%;height:300px; top:425px;">
+        <view style="position: absolute;width: 100%; display: flex;text-align: center;"
+          :style="{top: `${l.index*30}px`}" nt:for="l in start">
+          <view style="width: 11%;">{{l.date}}</view>
+          <view style="width: 14%;">{{l.summary}}</view>
+          <view style="width: 17%;">{{l.withdrawals}}</view>
+          <view style="width: 18%;">{{l.deposit}}</view>
+          <view style="width: 17%;">{{l.balance}}</view>
+          <view style="width: 12%;">{{l.remark}}</view>
+          <view style="width: 11%;">{{l.cashier}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="pdf" id="sparbuch" title="4" nt:for="con in content">
+    <view :style="{background:`url(${base_content})no-repeat`}"
+      style="position: relative; height: 800px;background-size: 100% 100%;font-size:16px;">
+      <view style="position: absolute;left:5%; width: 95%;height:300px; top:85px;">
+        <template nt:if="con.top && con.top.length >0">
+          <view style="position: absolute;width: 100%; display: flex;text-align: center;"
+            :style="{top: `${t.index*30}px`}" nt:for="t in con.top">
+            <view style="width: 11%;">{{t.date}}</view>
+            <view style="width: 14%;">{{t.summary}}</view>
+            <view style="width: 17%;">{{t.withdrawals}}</view>
+            <view style="width: 18%;">{{t.deposit}}</view>
+            <view style="width: 17%;">{{t.balance}}</view>
+            <view style="width: 12%;">{{t.remark}}</view>
+            <view style="width: 11%;">{{t.cashier}}</view>
+          </view>
+        </template>
+
+      </view>
+      <view style="position: absolute;left:5%; width: 95%;height:300px; top:425px;">
+        <template nt:if="con.bottom && con.bottom.length >0">
+          <view style="position: absolute;width: 100%; display: flex;text-align: center;"
+            :style="{top: `${b.index*30}px`}" nt:for="b in con.bottom">
+            <view style="width: 11%;">{{b.date}}</view>
+            <view style="width: 14%;">{{b.summary}}</view>
+            <view style="width: 17%;">{{b.withdrawals}}</view>
+            <view style="width: 18%;">{{b.deposit}}</view>
+            <view style="width: 17%;">{{b.balance}}</view>
+            <view style="width: 12%;">{{b.remark}}</view>
+            <view style="width: 11%;">{{b.cashier}}</view>
+          </view>
+        </template>
+
+      </view>
+    </view>
+  </view>
+
+  <view class="pdf" id="sparbuch" title="5" nt:if="end && end.length > 0">
+    <view :style="{background:`url(${base_end})no-repeat`}"
+      style="position: relative; height: 800px;background-size: 100% 100%;font-size:16px;">
+      <view style="position: absolute;left:5%; width: 95%;height:300px; top:80px;">
+        <view style="position: absolute;width: 100%; display: flex;text-align: center;"
+          :style="{top: `${l.index*30}px`}" nt:for="l in end">
+          <view style="width: 11%;">{{l.date}}</view>
+          <view style="width: 14%;">{{l.summary}}</view>
+          <view style="width: 17%;">{{l.withdrawals}}</view>
+          <view style="width: 18%;">{{l.deposit}}</view>
+          <view style="width: 17%;">{{l.balance}}</view>
+          <view style="width: 12%;">{{l.remark}}</view>
+          <view style="width: 11%;">{{l.cashier}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

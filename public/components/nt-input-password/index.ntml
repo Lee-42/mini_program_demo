@@ -1,0 +1,8 @@
+<!-- public\components\nt-input-password\index\index.ntml -->
+<view>
+    <nt-form-item :prop="fieldName" :label="label" :required="required" :ntValidator="passwordRule">
+        <nt-input type="password" nt:bind="$attrs" @focus="handleFocus" :isFuc="true" @func="customFocus" ref="inputZ"
+            v-model="password" :fieldName="fieldName" @input="handleInput">
+        </nt-input>
+    </nt-form-item>
+</view>

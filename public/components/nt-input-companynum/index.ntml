@@ -1,0 +1,10 @@
+<!-- <nt-form-item prop="companynum"> -->
+<nt-form-item :prop="fieldName" :ntValidator="companynumRule" :label="label" :required="required">
+
+    <nt-input nt:bind="$attrs" @focus="handleFocus" :isFuc="true" ref="inputZ" v-model="companynum" @input="handleInput"
+        :fieldName="fieldName">
+        <template #suffix nt:if="{{ isShowTextLength }}">
+            {{companynum ? companynum.length : 0}}
+        </template>
+    </nt-input>
+</nt-form-item>

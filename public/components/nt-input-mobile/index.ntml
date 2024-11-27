@@ -1,0 +1,7 @@
+<view>
+    <nt-form-item :prop="fieldName" :ntValidator="phoneNumberValidate" :label="label" :required="required">
+        <nt-input nt:bind="$attrs" :isFuc="true" ref="inputZ" @input="handleInput" :fieldName="fieldName"
+            v-model="mobile">
+        </nt-input>
+    </nt-form-item>
+</view>

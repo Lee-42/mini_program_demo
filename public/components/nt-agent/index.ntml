@@ -1,0 +1,68 @@
+<!-- public\components\agent\agent.ntml -->
+
+<nt-layout class="c-agent" border="{{ border }}">
+  <template #header>{{ header }}</template>
+  <nt-form-item label="是否代理人" prop="isAgent" required>
+    <nt-select v-model="formModel.isAgent" fieldName="isAgent" @change="onIsAgentChange">
+      <nt-option label="是" value="Y"></nt-option>
+      <nt-option label="否" value="N"></nt-option>
+    </nt-select>
+  </nt-form-item>
+  <template nt:if="{{ formModel.isAgent === 'Y' }}">
+    <nt-select-idtype v-model="formModel.cardNoType" label="代理人证件类型" fieldName="cardNoType" required
+      mainTranCd="{{ mainCd }}" />
+    <template nt:if="{{ !!formModel.cardNoType }}">
+      <nt-input-personidnum label="代理人证件号码" v-model="formModel.cardNo" fieldName="cardNo"
+        cardType="{{ formModel.cardNoType }}" isToUpperCase isShowTextLength operType="3" required
+        ntValidator="{{ onCardNoValidate }}" @getIDCardInfo="onGetCardInfo" />
+      <nt-form-item label="发证机关" prop="licenceAuthority">
+        <nt-input v-model="formModel.licenceAuthority" fieldName="licenceAuthority" disabled></nt-input>
+      </nt-form-item>
+      <nt-form-item label="核查结果" prop="checkResult" nt:if="{{ !!formModel.checkResult }}">
+        <nt-select v-model="formModel.checkResult" disabled fieldName="checkResult">
+          <nt-option nt:for="opt in checkResultOptions" key="{{ opt.value }}" label="{{ opt.label }}"
+            value="{{ opt.value }}"></nt-option>
+        </nt-select>
+      </nt-form-item>
+    </template>
+    <nt-form-item label="联网标志" prop="linkNet">
+      <nt-select v-model="formModel.linkNet" fieldName="linkNet" disabled>
+        <nt-option nt:for="opt in linkNetOptions" key="{{ opt.value }}" label="{{ opt.label }}"
+          value="{{ opt.value }}"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <nt-form-item label="佐证证件" prop="supportType">
+      <nt-select v-model="formModel.supportType" fieldName="supportType" disabled>
+        <nt-option nt:for="opt in supportTypeOptions" key="{{ opt.value }}" label="{{ opt.label }}"
+          value="{{ opt.value }}"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <nt-form-item label="代理人名称" prop="agentName" required>
+      <nt-input v-model="formModel.agentName" fieldName="agentName"
+        disabled="{{ formModel.linkNet === '1' }}"></nt-input>
+    </nt-form-item>
+    <nt-input-mobile label="代理人联系方式" v-model="formModel.agentContact" fieldName="agentContact" required
+      ntValidator="{{ phoneNumberValidate }}" />
+    <!-- TODO 初版暂时不提供下列标单项 -->
+    <!-- <template nt:if="{{false}}">
+      <nt-select-idtype
+        v-model="formModel.cardNoType"
+        label="本人证件类型"
+        fieldName="cardNoType"
+        required
+        mainTranCd="{{ mainCd }}"
+      />
+      <nt-form-item label="代理人证件号码" prop="cardNo" ntValidator="{{ onCardNoValidate }}" required>
+        <nt-input
+          v-model="formModel.cardNo"
+          fieldName="cardNo"
+          @ntblur="onCardInfoChange"
+        ></nt-input>
+      </nt-form-item>
+    </template> -->
+  </template>
+</nt-layout>
+
+<!-- 联网核查控件 -->
+<nt-onlinecheck v-model="onlinecheckVisible" mainCd="{{ mainCd }}" checkIDNo="{{ onlinecheckId }}"
+  idCardAvatar="{{ idCardAvatar }}" storageFrom="agent" @check="onOnlinecheck" />

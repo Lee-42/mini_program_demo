@@ -1,0 +1,6 @@
+<!-- public\components\inputMobile\inputMobile\inputMobile.ntml -->
+<nt-form-item :label="label" :prop="fieldName" :required="required" :ntValidator="englishNameRule">
+
+  <nt-input ref="inputZ" nt:bind="$attrs" @input="handleInput" type="text" v-model="englishName" maxlength="20"
+    :fieldName="fieldName"></nt-input>
+</nt-form-item>

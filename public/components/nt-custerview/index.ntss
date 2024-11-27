@@ -1,0 +1,216 @@
+/* components\poc-menu-right\index.ntss */
+// 快速查询模块样式修改
+.nt-poc-card{
+    padding: 16/75rem 15/75rem;
+    background-color: #fff;
+    border-radius: 8/75rem;
+    /deep/.nt-button--text{
+        padding: 0;
+        height:auto;
+    } 
+}
+.no-login{
+    flex: 1;
+    padding-bottom: 45/75rem;
+    /deep/.nt-card__body{
+        padding: 20/75rem 40/75rem;
+    } 
+
+    /deep/.nt-form-wrapper{
+        column-count: 1 !important;
+    }
+    .line{
+        // width: auto;
+        height: 1px;
+        background-color: #eee;
+        width: 100%;
+        margin-top: 10/75rem;
+
+    }
+}
+.nt-poc-card+.nt-poc-card{
+    margin-top: 18/75rem;
+}
+// 标题
+.nt-poc-title{
+    display: flex;
+    .nt-poc-title__decoration{
+        width: 3/75rem;
+        height: 20/75rem;
+        background-color:  #4581F3;
+        margin-right: 7/75rem;
+    }
+    .nt-poc-title__content{
+        font-size: 20/75rem;
+        font-weight: 600;
+        color: #333333;
+    }
+}
+// 叫号-信息
+.queue-info{
+    display: flex;
+    justify-content: flex-end;
+    .queue-info-item{
+        width: min-content;
+        display: flex;
+        flex: 0.3;
+        flex-shrink: 0;
+    }
+    .queue-info__label,
+    .queue-info__content{
+        font-size: 14/75rem;
+        line-height: 28/75rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+    .queue-info__content.current{
+        font-size: 20/75rem;
+    }
+}
+// 叫号菜单
+.queue-menu{
+    margin-top: 25/75rem;
+    margin-bottom: 13/75rem;
+    display: flex;
+    justify-content: space-evenly;
+    .queue-menu-item{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        .queue-menu-item__img{
+            width: 40/75rem;
+            height: 40/75rem;
+        }
+        .queue-menu-item__label{
+            margin-top: 16/75rem;
+            font-size: 16/75rem;
+            color: #000;
+        }
+    }
+}
+// 客户信息
+.customer-infos{
+    margin-top: 22/75rem;
+}
+.property-situation{
+    margin-top: 20/75rem;
+    .property-situation-title{
+        font-size: 13/75rem;
+        margin-bottom: 13/75rem;
+    }
+}
+// 推荐信息
+.recommend-infos{
+    margin-top: 15/75rem;
+    .recommend-table{
+        width: 100%;
+        .recommend-table__header{
+            .recommend-table__cell{
+                text-align: left;
+                font-weight: 600;
+            }
+        }
+        .recommend-table__cell{
+                padding: 9/75rem 0;
+        }
+        .recommend-table__cell.is-center{
+            text-align: center;
+        }
+        .serial-number{
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: #3B6DD2;
+            border-radius: 50%;
+            color: #fff;
+            line-height: 20/75rem;
+        }
+    }
+    .recommend-button{
+        margin: 0 auto;
+        width: fit-content;
+        height: fit-content;
+        font-size: 14/75rem;
+        border-radius: 4/75rem;
+        color: #fff;
+        box-sizing: border-box;
+        line-height: 24/75rem;
+        padding: 2/75rem 8/75rem;
+        border: 0;
+        cursor: pointer;
+    }
+    .recommend-button:active{
+        color: #fff;
+        border: 0;
+    }
+    .recommend-button.is-primary{
+        background: #3B6DD2;
+    }
+    .recommend-button.is-primary:hover,
+    .recommend-button.is-primary:focus{
+        background: #487ce4;
+    }
+    .recommend-button.is-primary:active{
+        background: #2c5dbe;
+    }
+    .recommend-button.is-warning{
+        background: #B37C3A;
+    }
+    .recommend-button.is-warning:hover,
+    .recommend-button.is-warning:focus{
+        background: #c4873e;
+    }
+    .recommend-button.is-warning:active{
+        background: #a77130;
+    }
+}
+// 快速查询
+/deep/.search-form{
+    margin-top: 10/75rem;
+    .nt-form-item__label{
+        font-weight: 500;
+        color: #333333;
+        height: 36px;
+        line-height: 36px;
+    }
+    .nt-select {
+        width: 256px;
+        height: 36px;
+        line-height: 36px;
+    }
+    .nt-input {
+        width: 256px;
+        height: 36px;
+        line-height: 36px;
+    }
+}
+.search-form__footer{
+        display: flex;
+        margin: 0 50/75rem;
+        justify-content: space-evenly;
+        .nt-button{
+            width: 135/75rem;
+            height: 46/75rem;
+            border-color: #3b6dd2;
+            background-color: #fff;
+            color: #3b6dd2;
+        }
+        .nt-button:focus, .nt-button:hover {
+            border-color: #3b6dd2;
+            background-color: #fafbfe;
+            color: #3b6dd2;
+        }
+        .nt-button--primary {
+            color: #FFF;
+            background-color: #3b6dd2;
+            border-color: #3b6dd2;
+        }
+        .nt-button--primary:focus,
+        .nt-button--primary:hover{
+            color: #FFF;
+            background-color: #4678db;
+            border-color: #4678db;
+        }
+    }

@@ -1,0 +1,6 @@
+<nt-form-item :prop="fieldName" :ntValidator="proportionRule" :label="label" :required="required">
+    <nt-input nt:bind="$attrs" :isFuc="true"  ref="inputZ" @input="handleInput"
+        :fieldName="fieldName" @blur="handleBlur()" v-model="proportion">
+        <template #suffix> %&nbsp; </template>
+    </nt-input>
+</nt-form-item>

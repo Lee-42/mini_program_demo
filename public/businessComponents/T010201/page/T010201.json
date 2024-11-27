@@ -1,0 +1,18 @@
+{
+  "component": true,
+  "usingComponents": {
+    "nt-submit-business": "public/components/nt-submit-business/index",
+    "nt-input-account": "public/components/nt-input-account/index",
+    "nt-input-companynum": "public/components/nt-input-companynum/index",
+    "nt-select-idtype": "public/components/nt-select-idtype/index",
+    "nt-input-personidnum": "public/components/nt-input-personidnum/index",
+    "nt-input-mobile": "public/components/nt-input-mobile/index",
+    "nt-input-telphone": "public/components/nt-input-telphone/index",
+    "nt-querylist": "public/components/nt-querylist/index",
+    "nt-input-money": "public/components/nt-input-money/index",
+    "UploadAccount": "public/businessComponents/T010201/components/UploadAccount/UploadAccount",
+    "OperationInfo": "public/businessComponents/T010201/components/OperationInfo/OperationInfo",
+    "SellCalculator": "public/businessComponents/SellCalculator/index",
+    "my-print": "public/businessComponents/T010201/components/print/print"
+  }
+}

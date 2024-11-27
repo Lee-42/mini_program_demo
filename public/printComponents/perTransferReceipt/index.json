@@ -1,0 +1,6 @@
+{
+    "component": true,
+    "usingComponents": {
+        "person-receipt": "public/printComponents/perReceipt/index"
+    }
+}

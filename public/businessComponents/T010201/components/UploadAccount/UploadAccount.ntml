@@ -1,0 +1,72 @@
+<nt-form class="c-upload-account" model="{{ formModel }}" label-width="130px" inline
+  disabled="{{ expandFormData.operationFlag === 'D' }}">
+  <nt-layout border>
+    <template #header>账号信息</template>
+    <template nt:if="{{ !isOneStop }}">
+      <nt-input-account label="银行账号" v-model="formModel.acctNo" fieldName="acctNo" required
+        readonly="{{ expandFormData.operationFlag === 'U' || formModel.mainAcctFlg === '1' }}"
+        ntValidator="{{ onAccountValidate }}" myAutoFocus="upload-account" operType="2" />
+      <nt-form-item label="账户序号" prop="acctSrlNo">
+        <nt-input v-model="formModel.acctSrlNo" fieldName="acctSrlNo" disabled></nt-input>
+      </nt-form-item>
+    </template>
+    <nt-form-item class="nt-layout-block" label="账户名称" prop="acctNm">
+      <nt-input v-model="formModel.acctNm" fieldName="acctNm" disabled></nt-input>
+    </nt-form-item>
+    <nt-form-item label="开户网点" prop="brchNo">
+      <nt-input v-model="formModel.brchNo" fieldName="brchNo" disabled></nt-input>
+    </nt-form-item>
+    <nt-form-item label="账户类型" prop="acctTp">
+      <nt-select v-model="formModel.acctTp" fieldName="acctTp" disabled>
+        <nt-option nt:for="opt in acctList" :key="opt.value" value="{{opt.value}}" label="{{opt.label}}"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <nt-form-item label="上挂日期" prop="adHngDt">
+      <nt-input v-model="formModel.adHngDt" fieldName="adHngDt" disabled></nt-input>
+    </nt-form-item>
+    <nt-select-currency label="币种" v-model="formModel.currencyCcy" fieldName="currencyCcy" disabled />
+    <nt-form-item label="钞汇标志" prop="cashDrftFlg">
+      <nt-select v-model="formModel.cashDrftFlg" fieldName="cashDrftFlg" disabled>
+        <nt-option nt:for="opt in cashDrftFlgList" :key="opt.value" value="{{opt.value}}"
+          label="{{opt.label}}"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <nt-form-item label="账户属主标识" prop="acctBlngMainInd">
+      <nt-select v-model="formModel.acctBlngMainInd" fieldName="acctBlngMainInd" @change="onOwnerFlagChange"
+        myAutoFocus="one-stop-upload-account">
+        <nt-option value="1" label="自身账户"></nt-option>
+        <nt-option value="0" label="授权账户"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <nt-form-item label="是否主账户" prop="mainAcctFlg">
+      <nt-select v-model="formModel.mainAcctFlg" fieldName="mainAcctFlg"
+        disabled="{{ formModel.acctBlngMainInd === '0' }}">
+        <nt-option value="0" label="否"></nt-option>
+        <nt-option value="1" label="是"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <nt-form-item label="账号权限" prop="acctPrvgCd" ntValidator="{{ onAcRightValidate }}">
+      <nt-select v-model="formModel.acctPrvgCd" fieldName="acctPrvgCd" disabled="{{ acRightReadonly }}">
+        <nt-option nt:if="{{ formModel.exnFlgCd !== 'Y' && !expandFormData.onlyQuery }}" value="FT"
+          label="任意转出"></nt-option>
+        <nt-option value="Q" label="仅开通查询"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <!-- 账号权限 - 仅开通查询 / 账户类型 - 外币户 仅支持查看 -->
+    <template nt:if="{{ formModel.acctPrvgCd === 'FT' && formModel.acctTp !== 'E' }}">
+      <nt-input-money label="单笔限额" v-model="formModel.snglTfrAcctRstdLmt" fieldName="snglTfrAcctRstdLmt" required
+        ntValidator="{{ onPerTrsValidate }}" />
+      <nt-input-money label="日累计限额" v-model="formModel.tfrAcctDayAcmRstdLmt" fieldName="tfrAcctDayAcmRstdLmt" required
+        ntValidator="{{ onPerDayValidate }}" />
+      <nt-form-item label="日笔数" prop="tfrAcctSnglDayLineNum" required ntValidator="{{ onPerTimeValidate }}">
+        <nt-input v-model="formModel.tfrAcctSnglDayLineNum" fieldName="tfrAcctSnglDayLineNum" maxlength="5"
+          type="number"></nt-input>
+      </nt-form-item>
+      <nt-input-money label="年累计限额" v-model="formModel.tfrAcctYrAcmRstdLmt" fieldName="tfrAcctYrAcmRstdLmt" required
+        ntValidator="{{ onYearTrsValidate }}" />
+    </template>
+    <nt-form-item class="nt-layout-block">
+      <nt-submit type="primary" v-debounce="submit">提交</nt-submit>
+    </nt-form-item>
+  </nt-layout>
+</nt-form>

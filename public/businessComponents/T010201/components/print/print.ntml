@@ -1,0 +1,136 @@
+<nt-printTemplate name="{{ isEdit ? '企业网银签约变更' : '企业网银签约' }}" printData="{{ data }}">
+  <div style="display: flex;align-items: center;flex-direction: column;line-height: 1.5;">
+    <div style="white-space: nowrap;">
+      ------------------------------------------------------企业基本信息------------------------------------------------------
+    </div>
+    <div style="width: 100%;display:grid;grid-template-columns: repeat(2, 50%);">
+      <span>核心客户号：{{ data.coreCstNo }}</span>
+      <span>电子银行客户号：{{ data.eleCstNo }}</span>
+      <span>证件类型：{{ data.identTp }}</span>
+      <span>证件号码：{{ data.identNo }}</span>
+    </div>
+    <div style="width: 100%;display: flex;">
+      企业名称：
+      <span style="flex:1;border: 1px solid #ddd;min-height: 28px;">
+        {{ data.eleBnkCstNm }}
+      </span>
+    </div>
+    <div style="width: 100%;display:grid;grid-template-columns: repeat(2, 50%);">
+      <span>联系人姓名：{{ data.ctcPrsnNm }}</span><span></span>
+      <span>联系人证件类型：{{ data.ctcPrsnIdentTp }}</span>
+      <span>联系人证件号码：{{ data.ctcPrsnIdentNo }}</span>
+      <span>联系人手机号码：{{ data.ctcPrsnMblNo }}</span>
+      <span>联系人电话号码：{{ data.ctcPrsnTelNo }}</span>
+      <span>联系人Email地址：{{ data.ctcPrsnEmail }}</span><span></span>
+      <span>客户经理1姓名：{{ data.cstMgrNm1 }}</span>
+      <span>客户经理1工号：{{ data.cstMgrWrkNo }}</span>
+      <span>客户经理2姓名：{{ data.recomPrsnNm }}</span>
+      <span>客户经理2工号：{{ data.recomPrsnWrkNo }}</span>
+    </div>
+    <div style="white-space: nowrap;">
+      ------------------------------------------------------业务开通信息------------------------------------------------------
+    </div>
+    <div style="width: 100%;display:grid;grid-template-columns: repeat(2, 50%);">
+      <!-- TODO 变更字段需要补充 -->
+      <span>管理类交易生效模式：{{ data.mgtTpTranTkEffMd }}</span>
+      <span nt:if="{{ data.dsbrPltfmMrchNo }}">商户号(支付平台)：{{ data.dsbrPltfmMrchNo }}</span>
+      <span>转账收款人限制：{{ data.tfrAcctPyeRstd }}</span>
+      <span nt:if="{{ data.mrchNo }}">商户号(其他平台)：{{ data.mrchNo }}</span>
+      <template nt:if="{{ isEdit }}">
+        <span>网银申请日期：{{ expandData.aplyDt }}</span>
+        <span>网银开户机构：{{ expandData.sgntrBnkNm }}</span>
+      </template>
+    </div>
+    <div style="width: 100%;display: flex;">
+      开通网银业务：
+      <span style="flex:1;border: 1px solid #ddd;min-height: 28px;">
+        {{ expandData.prdStr }}
+      </span>
+    </div>
+    <template nt:if="{{ !isEdit }}">
+      <div style="white-space: nowrap;">
+        ------------------------------------------------------操作员信息------------------------------------------------------
+      </div>
+      <div style="width: 100%;min-height: 100px;">
+        <table style="width: 100%;border-color: #eee;font-size: 12px;" border cellspacing="0">
+          <thead>
+            <tr>
+              <th style="font-weight: normal;">操作员号</th>
+              <th style="font-weight: normal;">操作员姓名</th>
+              <th style="font-weight: normal;">证件类型</th>
+              <th style="font-weight: normal;">证件号码</th>
+              <th style="font-weight: normal;">手机号码</th>
+              <th style="font-weight: normal;">所属角色</th>
+              <th style="font-weight: normal;">可操作账户</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr nt:for="(data, index) in expandData.operationPrintTable" key="{{ index }}">
+              <td>{{ data.oprNo }}</td>
+              <td>{{ data.oprNm }}</td>
+              <td>{{ data.identTp }}</td>
+              <td>{{ data.identNo }}</td>
+              <td>{{ data.mblNo }}</td>
+              <td>{{ data.roles }}</td>
+              <td>{{ data.accounts }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="white-space: nowrap;">
+        ------------------------------------------------------加挂账号列表------------------------------------------------------
+      </div>
+      <div style="width: 100%;min-height: 100px;">
+        <table style="width: 100%;border-color: #eee;font-size: 12px;" border cellspacing="0">
+          <thead>
+            <tr>
+              <th style="font-weight: normal;">账号</th>
+              <th style="font-weight: normal;">主账户</th>
+              <th style="font-weight: normal;">账户权限</th>
+              <th style="font-weight: normal;">单笔限额</th>
+              <th style="font-weight: normal;">日累计限额</th>
+              <th style="font-weight: normal;">年累计限额</th>
+              <th style="font-weight: normal;">单日笔数</th>
+              <th style="font-weight: normal;">上挂日期</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr nt:for="(data, index) in expandData.acPrintTable" key="{{ index }}">
+              <td>{{ data.acctNo }}</td>
+              <td>{{ data.entpMainAcctNoFlg }}</td>
+              <td>{{ data.acctNoPrvgCd }}</td>
+              <td>{{ data.daySnglRstdLmt }}</td>
+              <td>{{ data.dayAcmRstdLmt }}</td>
+              <td>{{ data.yrAcmRstdLmt }}</td>
+              <td>{{ data.dayLineNum }}</td>
+              <td>{{ data.upHngDt }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </template>
+    <template nt:elif="{{ expandData.changedAcPrintTable.length }}">
+      <div style="white-space: nowrap;">
+        ------------------------------------------------------加挂账号变更信息------------------------------------------------------
+      </div>
+      <div style="width: 100%;min-height: 168px;">
+        <table style="width: 100%;border-color: #eee;font-size: 12px;" border cellspacing="0">
+          <thead>
+            <tr>
+              <th style="font-weight: normal;">账号</th>
+              <th style="font-weight: normal;">属性</th>
+              <th style="font-weight: normal;">修改信息</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr nt:for="(data, index) in expandData.changedAcPrintTable" key="{{ index }}">
+              <td>{{ data.acctNo }}</td>
+              <td>{{ data.property }}</td>
+              <td>{{ data.info }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </template>
+  </div>
+</nt-printTemplate>

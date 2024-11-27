@@ -1,0 +1,51 @@
+<div ref="pdf" class="pdf" :id="name" :style="{background:`url(${base})no-repeat`}"
+  style="position: relative; height: 600px; font-size:16px;text-align: left; background-size: 100% 100%;">
+  <!-- 本模板 600像素 为内容宽度 -->
+  <!-- <img :src="`data:image/png;${base}`" /> -->
+  <div style="position: absolute;left: 7.5%;top:105px;width:62%;display: flex;flex-wrap: wrap;">
+    <slot name="left"></slot>
+  </div>
+  <div style="position: absolute;left: 74%;top:110px;width:25%;">
+    <slot name="right"></slot>
+  </div>
+  <div style="position: absolute;font-size: 25px;font-weight: bold;left: 37%;top: 29px;">{{type=='0'?"存款":"转账"||"---"}}
+  </div>
+  <div style="position: absolute;font-size: 20px;font-weight: bold;left: 85%;top: 50px;">{{type=='0'?"存款":"转账"||"---"}}
+  </div>
+
+  <div
+    style="position: absolute;left: 47%;top:78px;width:22%;height: 20px;display: flex;justify-content: space-between;">
+    <template nt:if="time">
+      <span>{{time && time.year||"---"}}</span>
+      <span>{{time.month||"---"}}</span>
+      <span>{{time.day||"---"}}</span>
+      <span>{{time.hour||"---"}}:{{time.minutes||"---"}}:{{time.second||"---"}}</span>
+    </template>
+  </div>
+  <div style="position: absolute;left: 41%;top: 370px;width: 28.5%;font-size: 12px;font-weight: bold;">
+    {{printData.TB_QT}}</div>
+  <div
+    style="position: absolute;left: 77%;top:78px;width:16%;height: 20px;display: flex;justify-content: space-between;">
+    <template nt:if="time">
+      <span>{{time.year||"---"}}</span>
+      <span>{{time.month||"---"}}</span>
+      <span>{{time.day||"---"}}</span>
+      <span>{{time.hour||"---"}}:{{time.minutes||"---"}}:{{time.second||"---"}}</span>
+    </template>
+  </div>
+
+  <div style="position: absolute;display: flex;justify-content: space-between;width: 42%;left: 18%;top: 530px;">
+    <div>{{printData.TB_Teller2 ||"---"}}</div>
+    <div>{{printData.TB_Teller2 ||"---"}}</div>
+    <div>{{printData.TB_Teller2 ||"---"}}</div>
+    <div>{{printData.TB_Teller2 ||"---"}}</div>
+  </div>
+  <div style="position: absolute;display: flex;justify-content: space-between;width: 17%;left: 79%;top: 532px;">
+    <div>{{printData.TB_Teller2 ||"---"}}</div>
+    <div>{{printData.TB_Teller2 ||"---"}}</div>
+  </div>
+  <div style="position: absolute;display: flex;justify-content: space-between;width: 20%;left: 12.5%;top: 560px;">
+    <div>业务流水:{{printData.TB_Teller2 ||"---"}}</div>
+    <div>柜员流水:{{printData.TB_Teller2 ||"---"}}</div>
+  </div>
+</div>

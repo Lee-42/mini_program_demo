@@ -1,0 +1,4 @@
+.vchrKndTp {
+    display: flex;
+    flex-wrap: wrap;
+}

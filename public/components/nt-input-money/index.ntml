@@ -1,0 +1,80 @@
+<nt-form-item :prop="fieldName" :ntValidator="moneyRule" :label="label" :required="required">
+    <nt-input nt:bind="$attrs" ref="inputZ" @focus="focus" @input="handleInput" :fieldName="fieldName"
+        @blur="handleBlur()" v-model="money">
+        <template #prefix> {{ curCode }}&nbsp; </template>
+    </nt-input>
+</nt-form-item>
+
+<nt-dialog class="sum-dialog" title="券别登记" width="65%" v-model="showSum">
+    <nt-form :model="sum" label-position="right" label-width="70px">
+        <nt-layout header="金额校验">
+            <nt-form-item class="nt-layout-row-4" label="100元">
+                <nt-input disabled v-model="sum1.money1">
+                    <template #prefix> ￥&nbsp; </template>
+                </nt-input>
+            </nt-form-item>
+            <nt-form-item class="nt-layout-row-4" prop="money1" label-width="0px">
+                <nt-input fieldName="money1" type="number" v-model="sum.money1"></nt-input>
+            </nt-form-item>
+            <nt-form-item class="nt-layout-row-4" label="50元">
+                <nt-input disabled v-model="sum1.money2"><template #prefix> ￥&nbsp; </template></nt-input>
+            </nt-form-item>
+            <nt-form-item class="nt-layout-row-4" prop="money2" label-width="0px">
+                <nt-input fieldName="money2" type="number" v-model="sum.money2"></nt-input>
+            </nt-form-item>
+            <nt-form-item class="nt-layout-row-4" label="20元">
+                <nt-input disabled v-model="sum1.money3"><template #prefix> ￥&nbsp; </template></nt-input>
+            </nt-form-item>
+            <nt-form-item class="nt-layout-row-4" prop="money3" label-width="0px">
+                <nt-input fieldName="money3" type="number" v-model="sum.money3"></nt-input>
+            </nt-form-item>
+            <nt-form-item class="nt-layout-row-4" label="10元">
+                <nt-input disabled v-model="sum1.money4"><template #prefix> ￥&nbsp; </template></nt-input>
+            </nt-form-item>
+            <nt-form-item class="nt-layout-row-4" prop="money4" label-width="0px">
+                <nt-input fieldName="money4" type="number" v-model="sum.money4"></nt-input>
+            </nt-form-item>
+            <nt-form-item class="nt-layout-row-4" label="5元">
+                <nt-input disabled v-model="sum1.money5"><template #prefix> ￥&nbsp; </template></nt-input>
+            </nt-form-item>
+            <nt-form-item class="nt-layout-row-4" prop="money5" label-width="0px">
+                <nt-input fieldName="money5" type="number" v-model="sum.money5"></nt-input>
+            </nt-form-item>
+            <nt-form-item class="nt-layout-row-4" label="1元">
+                <nt-input disabled v-model="sum1.money6"><template #prefix> ￥&nbsp; </template></nt-input>
+            </nt-form-item>
+            <nt-form-item class="nt-layout-row-4" prop="money6" label-width="0px">
+                <nt-input fieldName="money6" type="number" v-model="sum.money6"></nt-input>
+            </nt-form-item>
+            <nt-form-item class="nt-layout-row-4" label="5角">
+                <nt-input disabled v-model="sum1.money7"><template #prefix> ￥&nbsp; </template></nt-input>
+            </nt-form-item>
+            <nt-form-item class="nt-layout-row-4" prop="money7" label-width="0px">
+                <nt-input fieldName="money7" type="number" v-model="sum.money7"></nt-input>
+            </nt-form-item>
+            <nt-form-item class="nt-layout-row-4" label="1角">
+                <nt-input disabled v-model="sum1.money8"><template #prefix> ￥&nbsp; </template></nt-input>
+            </nt-form-item>
+            <nt-form-item class="nt-layout-row-4" prop="money8" label-width="0px">
+                <nt-input fieldName="money8" type="number" v-model="sum.money8"></nt-input>
+            </nt-form-item>
+            <nt-form-item class="nt-layout-row-4" label="1分">
+                <nt-input disabled v-model="sum1.money9"><template #prefix> ￥&nbsp; </template></nt-input>
+            </nt-form-item>
+            <nt-form-item class="nt-layout-row-4" prop="money9" label-width="0px">
+                <nt-input fieldName="money9" type="number" v-model="sum.money9"></nt-input>
+            </nt-form-item>
+
+            <nt-view style="width: 100%;">
+                <nt-form-item prop="money_sum" label="统计金额">
+                    <nt-input fieldName="money_sum" v-model="money_sum" disabled><template #prefix> ￥&nbsp;
+                        </template></nt-input>
+                </nt-form-item>
+            </nt-view>
+            <nt-view style="width: 100%;display: flex;justify-content: end;">
+                <nt-button type="primary" @click="confirm">确定</nt-button>
+                <nt-button>取消</nt-button>
+            </nt-view>
+        </nt-layout>
+    </nt-form>
+</nt-dialog>

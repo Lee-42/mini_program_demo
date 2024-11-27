@@ -1,0 +1,15 @@
+<view>
+    <nt-dialog v-model="dialogFormVisible" :title="title" style="width: 80%;" :before-close="handleBeforeClose">
+        <!-- <nt-submit @submit="handleTest">查询</nt-submit> -->
+        <slot name="header"></slot>
+        <nt-layout header="查询结果">
+            <ntQuerylist style="width: 100%" ref="queryListRef" :filterConfigs="filterConfigs"
+                :tableConfigs="tableConfigs" :tableData="tableData" :total="total ? total : tableData.length"
+                :isPrint="false" :isExport="false" :isSortable="true" :useFullData="true"
+                @handleRowClick="handleRowClick" :isSelect="false" @selectRow="selectRow" nt:bind="$attrs"
+                nt:on="$listeners">
+            </ntQuerylist>
+        </nt-layout>
+        <slot name="footer"></slot>
+    </nt-dialog>
+</view>

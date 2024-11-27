@@ -1,0 +1,17 @@
+{
+  "component": true,
+  "usingComponents": {
+    "nt-agent": "public/components/nt-agent/index",
+    "nt-input-repeat": "public/components/nt-input-repeat/index",
+    "nt-select-currency": "public/components/nt-select-currency/index",
+    "nt-input-rate": "public/components/nt-input-rate/index",
+    "nt-input-proportion": "public/components/nt-input-proportion/index",
+    "nt-input-money": "public/components/nt-input-money/index",
+    "nt-select-idtype": "public/components/nt-select-idtype/index",
+    "nt-input-personidnum": "public/components/nt-input-personidnum/index",
+    "nt-input-mobile": "public/components/nt-input-mobile/index",
+    "nt-submit-business": "public/components/nt-submit-business/index",
+    "nt-onlinecheck": "public/components/nt-onlinecheck/index",
+    "my-print": "public/businessComponents/T200101/components/print/print"
+  }
+}

@@ -1,0 +1,175 @@
+<!-- <nt-button @click="testPrint">打印</nt-button>
+
+<my-print data="{{ printData }}" isEdit="{{ isEdit }}" expandData="{{ printData }}" /> -->
+
+
+<nt-form model="{{ formModel }}" label-width="150px" inline>
+  <nt-layout border nt:if="{{ !isOneStop }}">
+    <template #header>搜索条件</template>
+    <!-- 签约变更需要 -->
+    <nt-form-item label="电子银行客户号" prop="eleCstNo" nt:if="{{ isEdit }}">
+      <nt-input v-model="formModel.eleCstNo" fieldName="eleCstNo"></nt-input>
+    </nt-form-item>
+    <nt-input-account label="银行账号" v-model="formModel.acctNo" fieldName="acctNo" required="{{ !isEdit }}"
+      ntValidator="{{ onAccountValidate }}" operType="2" />
+    <!-- 签约变更 时 隐藏 -->
+    <nt-form-item label="账户序号" prop="acctSrlNo" nt:if="{{ !isEdit }}">
+      <nt-input v-model="formModel.acctSrlNo" fieldName="acctSrlNo" disabled></nt-input>
+    </nt-form-item>
+    <!-- 签约变更 时 可编辑 -->
+    <nt-form-item class="nt-layout-block" label="账户名称" prop="acctNm">
+      <nt-input v-model="formModel.acctNm" fieldName="acctNm" disabled="{{ !isEdit }}"></nt-input>
+    </nt-form-item>
+    <nt-form-item label="证件类型" prop="identTp">
+      <nt-select v-model="formModel.identTp" fieldName="identTp" disabled="{{ !isEdit }}">
+        <nt-option nt:for="opt in accountTypeList" key="{{ opt.value }}" value="{{ opt.value }}"
+          label="{{ opt.label }}"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <nt-input-companynum label="证件号码" v-model="formModel.identNo" fieldName="identNo" isToUpperCase isShowTextLength
+      cardType="{{ formModel.identTp }}" ntValidator="{{ identNoValidate }}" required="{{ !isEdit }}" />
+    <nt-form-item label="客户风险等级" prop="cstRiskLevel">
+      <nt-select v-model="formModel.cstRiskLevel" fieldName="cstRiskLevel" disabled>
+        <nt-option nt:for="opt in cstRiskLevelList" key="{{ opt.value }}" value="{{ opt.value }}"
+          label="{{ opt.label }}"></nt-option>
+      </nt-select>
+    </nt-form-item>
+    <nt-view style="text-align: right; padding-left: 60px;">
+      <nt-button data-extem="true" type="primary" @click="onSearch" fieldName="search">查询</nt-button>
+    </nt-view>
+    <nt-querylist style="width: 100%;" filterConfigs="{{ accountFilterConfig }}"
+      tableConfigs="{{ accountTableConfigs }}" tableData="{{ accountTableData }}" isSelect="{{ false }}"
+      isPrint="{{ false }}" @selectRow="onAccountSelected" />
+  </nt-layout>
+  <template nt:if="{{ formModel.clientName }}">
+    <nt-layout border>
+      <template #header>企业联系人信息</template>
+      <nt-select-idtype label="证件类型" v-model="formModel.ctcPrsnIdentTp" fieldName="ctcPrsnIdentTp"
+        myAutoFocus="one-stop-signing" />
+      <nt-input-personidnum label="证件号码" v-model="formModel.ctcPrsnIdentNo" fieldName="ctcPrsnIdentNo"
+        cardType="{{ formModel.ctcPrsnIdentTp }}" isToUpperCase isShowTextLength required operType="2" />
+      <nt-form-item label="姓 名" prop="ctcPrsnNm" required>
+        <nt-input v-model="formModel.ctcPrsnNm" fieldName="ctcPrsnNm"></nt-input>
+      </nt-form-item>
+      <nt-input-mobile label="手 机 号" v-model="formModel.ctcPrsnMblNo" fieldName="ctcPrsnMblNo" required />
+      <nt-input-telphone label="电 话" v-model="formModel.ctcPrsnTelNo" fieldName="ctcPrsnTelNo" />
+      <nt-form-item label="Email地址" prop="ctcPrsnEmail" ntValidator="{{ onEmailValidate }}">
+        <nt-input v-model="formModel.ctcPrsnEmail" fieldName="ctcPrsnEmail" maxlength="128"></nt-input>
+      </nt-form-item>
+    </nt-layout>
+    <nt-layout border>
+      <template #header>业务开通信息</template>
+      <nt-form-item class="nt-layout-block" label="开通网银业务">
+        <nt-table ref="prdTable" data="{{ prdListTableData }}" max-height="300" highlight-current-row
+          @selection-change="onPrdListSelectionChange">
+          <nt-table-column type="selection" width="55" />
+          <nt-table-column nt:for="item in prdListTableConfigs" align="center" sortable prop="{{ item.prop }}"
+            label="{{ item.label }}"> </nt-table-column>
+        </nt-table>
+      </nt-form-item>
+      <nt-form-item label="管理类交易生效模式" prop="mgtTpTranTkEffMd" required>
+        <nt-select v-model="formModel.mgtTpTranTkEffMd" fieldName="mgtTpTranTkEffMd">
+          <nt-option value="D" label="一记一复"></nt-option>
+          <nt-option value="S" label="单人通过"></nt-option>
+        </nt-select>
+      </nt-form-item>
+      <nt-form-item label="转账收款人限制" prop="tfrAcctPyeRstd" required>
+        <nt-select v-model="formModel.tfrAcctPyeRstd" fieldName="tfrAcctPyeRstd">
+          <nt-option value="O" label="开放式"></nt-option>
+        </nt-select>
+      </nt-form-item>
+      <template nt:if="{{ formModel.addMrchNoFlg === '1' }}">
+        <nt-form-item label="商户号(支付平台)" prop="dsbrPltfmMrchNo" required>
+          <nt-input v-model="formModel.dsbrPltfmMrchNo" fieldName="dsbrPltfmMrchNo" maxlength="20"></nt-input>
+        </nt-form-item>
+        <nt-form-item label="商户号(其他平台)" prop="mrchNo" required>
+          <nt-input v-model="formModel.mrchNo" fieldName="mrchNo" maxlength="20"></nt-input>
+        </nt-form-item>
+      </template>
+    </nt-layout>
+    <nt-layout border>
+      <template #header>客户经理1</template>
+      <nt-form-item label="客户经理姓名" prop="cstMgrNm1">
+        <nt-input v-model="formModel.cstMgrNm1" fieldName="cstMgrNm1"></nt-input>
+      </nt-form-item>
+      <nt-form-item label="客户经理工号" prop="cstMgrWrkNo" ntValidator="{{ onManagerSeqValidate }}">
+        <nt-input v-model="formModel.cstMgrWrkNo" fieldName="cstMgrWrkNo" maxlength="32"></nt-input>
+      </nt-form-item>
+    </nt-layout>
+    <nt-layout border>
+      <template #header>客户经理2</template>
+      <nt-form-item label="客户经理姓名" prop="recomPrsnNm">
+        <nt-input v-model="formModel.recomPrsnNm" fieldName="recomPrsnNm"></nt-input>
+      </nt-form-item>
+      <nt-form-item label="客户经理工号" prop="recomPrsnWrkNo" ntValidator="{{ onManagerSeqValidate }}">
+        <nt-input v-model="formModel.recomPrsnWrkNo" fieldName="recomPrsnWrkNo" maxlength="32"></nt-input>
+      </nt-form-item>
+    </nt-layout>
+    <nt-layout border>
+      <template #header>上挂账号</template>
+      <nt-querylist style="width: 100%;" filterConfigs="{{ acListFilterConfig }}"
+        tableConfigs="{{ acListTableConfigs }}" tableData="{{ acListTableData }}" isPrint="{{ false }}"
+        isSelect="{{ false }}" actionFixed="right">
+        <template #actions="props">
+          <nt-button link type="primary" size="small" @click="updateAcList(props.row)">详情</nt-button>
+          <nt-button link type="danger" size="small" @click="deleteAcList(props.row)">删除</nt-button>
+        </template>
+      </nt-querylist>
+      <nt-view class="query-list-actions">
+        <nt-button type="primary" size="small" @click="addAcList" fieldName="addAcList">新增</nt-button>
+      </nt-view>
+    </nt-layout>
+    <!-- 变更时，不显示操作员信息 -->
+    <nt-layout border nt:if="{{ !isEdit }}">
+      <template #header>操作员信息</template>
+      <nt-form-item label="凭证类型" prop="vchrTp" nt:if="{{ isOneStop }}" ntValidator="{{ handleUKeyTypeChange }}">
+        <nt-select v-model="formModel.vchrTp" fieldName="vchrTp">
+          <nt-option value="A06" label="企业网银椰盾"></nt-option>
+          <nt-option value="A09" label="银企直联椰盾"></nt-option>
+        </nt-select>
+      </nt-form-item>
+      <nt-querylist style="width: 100%;" filterConfigs="{{ operationFilterConfig }}"
+        tableConfigs="{{ operationTableConfigs }}" tableData="{{ operationTableData }}" isPrint="{{ false }}"
+        isSelect="{{ false }}" actionFixed="right">
+        <template #actions="props">
+          <nt-button link type="primary" size="small" @click="updateOperation(props.row)">详情</nt-button>
+          <nt-button link type="danger" size="small" @click="deleteOperation(props.row)">删除</nt-button>
+        </template>
+      </nt-querylist>
+      <nt-view class="query-list-actions">
+        <nt-button type="primary" size="small" @click="addOperation" fieldName="addOperation">新增</nt-button>
+      </nt-view>
+    </nt-layout>
+    <nt-layout border nt:if="{{ isOneStop }}">
+      <template #header>出售信息</template>
+      <SellCalculator formModel="{{ formModel }}" vchrTp="{{ formModel.vchrTp }}" disabled />
+    </nt-layout>
+  </template>
+  <nt-view style="text-align: right;margin:10px" nt:if="{{ isOneStop }}">
+    <nt-button type="default" fieldName="signingBtnReset" bindtap="clean">清 空</nt-button>
+    <nt-button type="primary" fieldName="signingBtnConfirm" bindtap="onSubmit">确 定</nt-button>
+  </nt-view>
+  <nt-view style="text-align: right;margin:10px" nt:else>
+    <nt-submit-business reqCode="{{ mainCd }}" system="esb" paymentParams="{{ paymentParams }}"
+      reqParams="{{ reqParams }}" beforeSubmit="{{ beforeSubmit }}" afterSubmit="{{ afterSubmit }}">
+      <template #default>提交</template>
+      <template #print="props">
+        <my-print data="{{ props.printData }}" isEdit="{{ isEdit }}" expandData="{{ localPrintData }}" hidden />
+      </template>
+    </nt-submit-business>
+  </nt-view>
+</nt-form>
+
+<nt-dialog v-model="dialogVisible" title="企业网银签约" append-to-body fullscreen destroy-on-close>
+  <UploadAccount nt:if="{{ dialogFormType === 'Account' }}" ref="uploadAccount" mainCd="{{ mainCd }}" :expandFormData="{
+      coreSeq: formModel.coreSeq,
+      riskLevel: formModel.cstRiskLevel === '0' ? '1' : formModel.cstRiskLevel,
+      clientName: formModel.clientName,
+      operationFlag: operationFlag,
+      onlyQuery: onlyQuery,
+    }" isOneStop="{{ isOneStop }}" @submit="onUploadAccountSubmit" />
+  <OperationInfo nt:elif="{{ !isEdit }}" ref="operationInfo" mainCd="{{ mainCd }}" :expandFormData="{
+      operationFlag: operationFlag
+    }" accountList="{{ acListTableData }}" roleList="{{ roleList }}" isOneStop="{{ isOneStop }}"
+    @submit="onOperationInfoSubmit" />
+</nt-dialog>

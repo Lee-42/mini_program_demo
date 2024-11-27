@@ -1,0 +1,9 @@
+<view>
+
+    <nt-form-item :prop="fieldName" :ntValidator="organizationcodeRule" :label="label" :required="required">
+        <nt-input nt:bind="$attrs"  ref="inputZ" @input="handleInput" :fieldName="fieldName" v-model="organizationcode">
+
+        </nt-input>
+    </nt-form-item>
+
+</view>

@@ -1,0 +1,7 @@
+{
+    "component": true,
+    "usingComponents": {
+        "nt-input-account": "public/components/nt-input-account/index",
+        "nt-input-password": "public/components/nt-input-password/index"
+    }
+}
