@@ -3,7 +3,7 @@
 	"launcher": "nt_launcher",
   "compiler": "nt_compiler",
   "devtools": "no_devtools",
-  "vconsole": false,
+  "vconsole": true,
   "eventTracking": false,
   "pages": ["pages/index/index"]
 }
