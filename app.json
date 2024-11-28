@@ -4,7 +4,7 @@
   "compiler": "nt_compiler",
   "devtools": "no_devtools",
   "vconsole": true,
-  "eventTracking": false,
+  "eventTracking": true,
   "pages": ["pages/index/index"]
 }
  
